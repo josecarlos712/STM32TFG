@@ -72,3 +72,6 @@ Command-line arguments:  -os win32 -ws win32 -arch x86_64
 
 !ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2022-03-15 14:43:58.743
 !MESSAGE Started RMI Server, listening on port 41337
+
+!ENTRY org.eclipse.cdt.core 1 0 2022-03-15 15:02:30.397
+!MESSAGE Indexed 'STM32TFG' (20 sources, 79 headers) in 4.68 sec: 4,067 declarations; 17,102 references; 0 unresolved inclusions; 1 syntax errors; 2 unresolved names (0.0094%)
