@@ -1,0 +1,33 @@
+/*
+ * generalTypes.h
+ *
+ *  Created on: Mar 29, 2022
+ *      Author: josec
+ */
+
+#ifndef INC_GENERALTYPES_H_
+#define INC_GENERALTYPES_H_
+
+//Includes
+#include "stdio.h"
+//Definiciones de codigo para cada movimiento
+#define NOPE = 0; //NP
+#define FORDWARD = 1; //FWD
+#define BACKWARD = 2; //BWD
+#define ROTATE_CLOCKWISE = 3; //RCW
+#define ROTATE_COUNTERCLOCKWISE = 4; //RCC
+#define BREAK = 5; //BRK
+//Definiciones de constantes
+const uint8_t NUM_CHARS_PER_INSTRUCTION = 7;
+
+//Definicion de estructuras
+typedef struct {
+	uint8_t duration;
+	uint8_t instruction;
+	//toString format: [COMMAND(3)][TIME_DECS(4)]
+} MovementInstruction;
+
+//Definicion de funciones
+void MovementInstruction_toString(MovementInstruction* pMovIns, char* buf); //Funcion toString del struct MovementInstruction
+
+#endif /* INC_GENERALTYPES_H_ */

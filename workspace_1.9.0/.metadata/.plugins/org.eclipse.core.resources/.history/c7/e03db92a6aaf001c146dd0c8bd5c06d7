@@ -1,0 +1,23 @@
+/*
+ * generalTypes.h
+ *
+ *  Created on: Mar 29, 2022
+ *      Author: josec
+ */
+
+#ifndef INC_GENERALTYPES_H_
+#define INC_GENERALTYPES_H_
+
+#define NOPE = 0;
+#define FORDWARD = 1;
+#define BACKWARD = 2;
+#define ROTATE_CLOCKWISE = 3;
+#define ROTATE_COUNTERCLOCKWISE = 4;
+#define BREAK = 6;
+
+typedef struct {
+	uint8_t duration;
+	uint8_t instruction;
+} MovementInstruction;
+
+#endif /* INC_GENERALTYPES_H_ */

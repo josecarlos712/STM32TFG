@@ -9,7 +9,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include "stm32l4xx_hal.h"
-//#include "main.h"
+#include "main.h"
+
+#include "generalTypes.h"
 
 void CreateSerialTask();
 void CreateSerialObjects(void);
