@@ -60,6 +60,11 @@ const osThreadAttr_t defaultTask_attributes = {
   .stack_size = 128 * 4,
   .priority = (osPriority_t) osPriorityNormal,
 };
+/* Definitions for xSemaphoreSerial */
+osSemaphoreId_t xSemaphoreSerialHandle;
+const osSemaphoreAttr_t xSemaphoreSerial_attributes = {
+  .name = "xSemaphoreSerial"
+};
 /* USER CODE BEGIN PV */
 xTaskHandle serialTaskHandle;
 /* USER CODE END PV */
@@ -131,8 +136,13 @@ int main(void)
   /* add mutexes, ... */
   /* USER CODE END RTOS_MUTEX */
 
+  /* Create the semaphores(s) */
+  /* creation of xSemaphoreSerial */
+  xSemaphoreSerialHandle = osSemaphoreNew(1, 1, &xSemaphoreSerial_attributes);
+
   /* USER CODE BEGIN RTOS_SEMAPHORES */
   /* add semaphores, ... */
+  CreateSerialObjects();
   /* USER CODE END RTOS_SEMAPHORES */
 
   /* USER CODE BEGIN RTOS_TIMERS */
@@ -164,6 +174,7 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
+
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */

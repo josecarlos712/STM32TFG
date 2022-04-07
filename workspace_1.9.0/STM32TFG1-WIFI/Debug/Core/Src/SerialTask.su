@@ -1,8 +1,8 @@
-../Core/Src/SerialTask.c:5:1:__io_putchar	16	static
-../Core/Src/SerialTask.c:16:1:__io_getchar	16	static
-../Core/Src/SerialTask.c:25:6:serialRxTask	16	static
-../Core/Src/SerialTask.c:44:6:serialTxTask	24	static
-../Core/Src/SerialTask.c:57:6:CreateSerialObjects	4	static
+../Core/Src/SerialTask.c:3:1:__io_putchar	16	static
+../Core/Src/SerialTask.c:14:1:__io_getchar	16	static
+../Core/Src/SerialTask.c:23:6:serialRxTask	16	static
+../Core/Src/SerialTask.c:42:6:serialTxTask	24	static
+../Core/Src/SerialTask.c:58:6:CreateSerialObjects	8	static
 ../Core/Src/SerialTask.c:66:6:CreateSerialTask	4	static
 ../Core/Src/SerialTask.c:74:6:HAL_UART_TxCpltCallback	16	static
 ../Core/Src/SerialTask.c:81:6:HAL_UART_RxCpltCallback	16	static

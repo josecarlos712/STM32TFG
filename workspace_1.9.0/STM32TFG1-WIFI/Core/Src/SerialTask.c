@@ -1,7 +1,5 @@
 #include "SerialTask.h"
 
-extern UART_HandleTypeDef huart1;
-
 PUTCHAR_PROTOTYPE {
 
 	while (HAL_OK != HAL_UART_Transmit(&huart1, (uint8_t*) &ch, 1, 30000)) {
@@ -42,22 +40,24 @@ void serialRxTask(void *parg) {
  }*/
 
 void serialTxTask(void *parg) {
-	char* s;
-
 	while (1) {
-		MovementInstruction_t mov = {FORDWARD, 20};
-
-		MovementInstruction_toString(&mov, &s);
-		printf("Movimiento %s\n\r", s);
-		vTaskDelay(1000);
+		uint8_t ins = I_FORDWARD;
+		uint8_t time = 10;
+		S_SendInstruction(ins, time);
+		vTaskDelay(time*100);
 	}
+	/*
+	 * TO-DO
+	 *
+	 * - Probar que S_SendInstruction imprime correctamente.
+	 * - Añadir semaforo que regule el uso compartido del puerto serie.
+	 */
 
 }
 
 void CreateSerialObjects() {
-	//Creamos un semáforo binario
-	//xSemaphore = xSemaphoreCreateBinary();
-	//xSemaphoreGive(xSemaphore);
+	//Liberamos el semaforo
+	xSemaphoreGive(xSemaphoreSerialHandle);
 
 	//Creamos una cola de 16 elementos en la que cada elemento tiene 1 byte
 	//xQueue = xQueueCreate(16, 1);

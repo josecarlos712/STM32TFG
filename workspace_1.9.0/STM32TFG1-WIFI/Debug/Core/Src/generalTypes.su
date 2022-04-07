@@ -1,1 +1,2 @@
-../Core/Src/generalTypes.c:10:6:MovementInstruction_toString	24	static
+../Core/Src/generalTypes.c:10:6:I_MovementInstruction_toString	24	static
+../Core/Src/generalTypes.c:19:9:I_CreateInstructionStruct	16	static

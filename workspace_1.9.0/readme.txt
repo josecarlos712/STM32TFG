@@ -4,7 +4,7 @@ Puerto serie UART funcional. HECHO
 
 Crear formato de instrucciones en un struct. Función _string. HECHO
 
-Crear funciones de la API que envie instrucciones: adelante, atras, rota derecha, rota izquierda.
+Crear funciones de la API que envie instrucciones: adelante, atras, rota derecha, rota izquierda.  HECHO
 
 Crear funciones de la API de más alto nivel que envie el coche a una posición determinada dado un vector de movimiento. (Por ahora según el algoritmo Manhatan)
 
