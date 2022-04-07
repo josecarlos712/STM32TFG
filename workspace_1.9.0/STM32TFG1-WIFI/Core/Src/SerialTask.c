@@ -25,9 +25,9 @@ void serialRxTask(void *parg) {
 	//char c;
 
 	while (1) {
-		//xQueueReceive(xQueue, &c, portMAX_DELAY);
-		//printf("Dato recibido: %c", c);
-		//vTaskDelay(200);
+		MovementInstruction_t *pMov;
+		xQueueSend(xQueue, pMov, 1);
+		vTaskDelay(500);
 	}
 
 }
@@ -40,17 +40,26 @@ void serialRxTask(void *parg) {
  }*/
 
 void serialTxTask(void *parg) {
+	uint8_t ins = I_FORDWARD;
+	uint8_t time = 10;
+
 	while (1) {
-		uint8_t ins = I_FORDWARD;
-		uint8_t time = 10;
-		S_SendInstruction(ins, time);
-		vTaskDelay(time*100);
+		//Reservo memoria para el puntero de instruccion
+		MovementInstruction_t *pMov = malloc(sizeof(MovementInstruction_t));
+		//Recibo la instruccion desde la cola
+		xQueueReceive(osMessageQueueId_t, pMov, portMAX_DELAY);
+		//Envio la instruccion por el puerto serie
+		S_SendInstruction(pMov->instruction, pMov->time);
+		//Espero durante lo que tarda la instruccion
+		vTaskDelay(pMov->time * 100);
+		//Libero la memoria del puntero de movimiento
+		free(pMov);
 	}
 	/*
 	 * TO-DO
 	 *
-	 * - Probar que S_SendInstruction imprime correctamente.
-	 * - Añadir semaforo que regule el uso compartido del puerto serie.
+	 * - Crear cola que saque uno a uno las instrucciones y las imprima
+	 * - Crear funciones de alto nivel que engloben varias instrucciones de movimiento
 	 */
 
 }
