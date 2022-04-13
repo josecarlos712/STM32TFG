@@ -1,0 +1,15 @@
+/*
+ * generalTypes.c
+ *
+ *  Created on: Mar 29, 2022
+ *      Author: josec
+ */
+
+#include "generalTypes.h"
+
+void MovementInstruction_toString(MovementInstruction_t* pMovIns, char* buf) {
+
+	buf = (char*)malloc(NUM_CHARS_PER_INSTRUCTION);
+
+	sprintf(buf, "%d - %ds\0", pMovIns->instruction, pMovIns->duration);
+}

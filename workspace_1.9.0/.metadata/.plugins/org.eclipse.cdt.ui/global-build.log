@@ -1,4 +1,4 @@
-22:17:53 **** Build of configuration Debug for project STM32TFG1-WIFI ****
+13:26:24 **** Build of configuration Debug for project STM32TFG1-WIFI ****
 make -j12 all 
 arm-none-eabi-gcc "../Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L475xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.d" -MT"Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.o"
 arm-none-eabi-gcc "../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/port.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L475xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/port.d" -MT"Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/port.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/port.o"
@@ -45,51 +45,24 @@ arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -D
 arm-none-eabi-gcc "../Core/Src/stm32l4xx_hal_msp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L475xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/stm32l4xx_hal_msp.d" -MT"Core/Src/stm32l4xx_hal_msp.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32l4xx_hal_msp.o"
 arm-none-eabi-gcc "../Core/Src/stm32l4xx_hal_timebase_tim.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L475xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/stm32l4xx_hal_timebase_tim.d" -MT"Core/Src/stm32l4xx_hal_timebase_tim.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32l4xx_hal_timebase_tim.o"
 arm-none-eabi-gcc "../Core/Src/stm32l4xx_it.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L475xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/stm32l4xx_it.d" -MT"Core/Src/stm32l4xx_it.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32l4xx_it.o"
-In file included from ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h:35,
-                 from ../Core/Inc/SerialTask.h:17,
-                 from ../Core/Inc/HAL_Instructions.h:17,
-                 from ../Core/Inc/SerialTask.h:13,
-                 from ../Core/Src/SerialTask.c:1:
-../Core/Src/SerialTask.c: In function 'serialRxTask':
-../Core/Src/SerialTask.c:29:14: error: 'xQueue' undeclared (first use in this function); did you mean 'xQueuePeek'?
-   29 |   xQueueSend(xQueue, pMov, 1);
-      |              ^~~~~~
-../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h:479:80: note: in definition of macro 'xQueueSend'
-  479 | #define xQueueSend( xQueue, pvItemToQueue, xTicksToWait ) xQueueGenericSend( ( xQueue ), ( pvItemToQueue ), ( xTicksToWait ), queueSEND_TO_BACK )
-      |                                                                                ^~~~~~
-../Core/Src/SerialTask.c:29:14: note: each undeclared identifier is reported only once for each function it appears in
-   29 |   xQueueSend(xQueue, pMov, 1);
-      |              ^~~~~~
-../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h:479:80: note: in definition of macro 'xQueueSend'
-  479 | #define xQueueSend( xQueue, pvItemToQueue, xTicksToWait ) xQueueGenericSend( ( xQueue ), ( pvItemToQueue ), ( xTicksToWait ), queueSEND_TO_BACK )
-      |                                                                                ^~~~~~
-../Core/Src/SerialTask.c: In function 'serialTxTask':
-../Core/Src/SerialTask.c:50:17: error: expected expression before 'osMessageQueueId_t'
-   50 |   xQueueReceive(osMessageQueueId_t, pMov, portMAX_DELAY);
-      |                 ^~~~~~~~~~~~~~~~~~
-../Core/Src/SerialTask.c:50:3: error: too few arguments to function 'xQueueReceive'
-   50 |   xQueueReceive(osMessageQueueId_t, pMov, portMAX_DELAY);
-      |   ^~~~~~~~~~~~~
-In file included from ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h:35,
-                 from ../Core/Inc/SerialTask.h:17,
-                 from ../Core/Inc/HAL_Instructions.h:17,
-                 from ../Core/Inc/SerialTask.h:13,
-                 from ../Core/Src/SerialTask.c:1:
-../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h:868:12: note: declared here
-  868 | BaseType_t xQueueReceive( QueueHandle_t xQueue, void * const pvBuffer, TickType_t xTicksToWait ) PRIVILEGED_FUNCTION;
-      |            ^~~~~~~~~~~~~
-../Core/Src/SerialTask.c:52:44: error: 'MovementInstruction_t' has no member named 'time'
-   52 |   S_SendInstruction(pMov->instruction, pMov->time);
-      |                                            ^~
-../Core/Src/SerialTask.c:54:18: error: 'MovementInstruction_t' has no member named 'time'
-   54 |   vTaskDelay(pMov->time * 100);
-      |                  ^~
-../Core/Src/SerialTask.c:44:10: warning: unused variable 'time' [-Wunused-variable]
-   44 |  uint8_t time = 10;
-      |          ^~~~
-../Core/Src/SerialTask.c:43:10: warning: unused variable 'ins' [-Wunused-variable]
-   43 |  uint8_t ins = I_FORDWARD;
-      |          ^~~
-make: *** [Core/Src/subdir.mk:49: Core/Src/SerialTask.o] Error 1
-make: *** Waiting for unfinished jobs....
-"make -j12 all" terminated with exit code 2. Build might be incomplete.
+arm-none-eabi-gcc "../Core/Src/syscalls.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L475xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/syscalls.d" -MT"Core/Src/syscalls.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/syscalls.o"
+arm-none-eabi-gcc "../Core/Src/sysmem.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L475xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/sysmem.d" -MT"Core/Src/sysmem.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sysmem.o"
+arm-none-eabi-gcc "../Core/Src/system_stm32l4xx.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L475xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/system_stm32l4xx.d" -MT"Core/Src/system_stm32l4xx.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/system_stm32l4xx.o"
+arm-none-eabi-gcc -o "STM32TFG1-WIFI.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\JoseCarlos\Programacion\STM32CubeIDE_Repositories\workspace_1.9.0\STM32TFG1-WIFI\STM32L475VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32TFG1-WIFI.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: STM32TFG1-WIFI.elf
+ 
+arm-none-eabi-size   STM32TFG1-WIFI.elf 
+arm-none-eabi-objdump -h -S  STM32TFG1-WIFI.elf  > "STM32TFG1-WIFI.list"
+   text	   data	    bss	    dec	    hex	filename
+  40364	    124	   9916	  50404	   c4e4	STM32TFG1-WIFI.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32TFG1-WIFI.list
+ 
+13:26:51 **** Incremental Build of configuration Debug for project STM32TFG1-WIFI ****
+make -j12 all 
+arm-none-eabi-size   STM32TFG1-WIFI.elf 
+   text	   data	    bss	    dec	    hex	filename
+  40364	    124	   9916	  50404	   c4e4	STM32TFG1-WIFI.elf
+Finished building: default.size.stdout
+ 

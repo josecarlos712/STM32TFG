@@ -24,6 +24,4 @@ void S_SendInstruction(uint8_t instCode, uint8_t time) {
 	printf("%s\n\r", s_mov);
 	//Devuelvo el control del puerto serie
 	xSemaphoreGive(xSemaphoreSerialHandle);
-	//Libero la memoria reservada por malloc
-	free(pMov);
 }

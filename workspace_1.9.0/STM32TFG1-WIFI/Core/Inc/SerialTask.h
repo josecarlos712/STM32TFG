@@ -18,7 +18,6 @@
 
 extern UART_HandleTypeDef huart1;
 extern osSemaphoreId_t xSemaphoreSerialHandle;
-extern osMessageQueueId_t instructionQueueHandle;
 
 void CreateSerialTask();
 void CreateSerialObjects(void);

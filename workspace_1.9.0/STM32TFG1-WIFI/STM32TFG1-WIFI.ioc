@@ -1,8 +1,6 @@
 #MicroXplorer Configuration settings - do not modify
 FREERTOS.BinarySemaphores01=xSemaphoreSerial,Dynamic,NULL
-FREERTOS.FootprintOK=true
-FREERTOS.IPParameters=Tasks01,configUSE_PREEMPTION,configUSE_NEWLIB_REENTRANT,BinarySemaphores01,Queues01,FootprintOK
-FREERTOS.Queues01=instructionQueue,100,MovementInstruction_t,0,Dynamic,NULL,NULL
+FREERTOS.IPParameters=Tasks01,configUSE_PREEMPTION,configUSE_NEWLIB_REENTRANT,BinarySemaphores01
 FREERTOS.Tasks01=defaultTask,24,128,StartDefaultTask,Default,NULL,Dynamic,NULL,NULL
 FREERTOS.configUSE_NEWLIB_REENTRANT=1
 FREERTOS.configUSE_PREEMPTION=1

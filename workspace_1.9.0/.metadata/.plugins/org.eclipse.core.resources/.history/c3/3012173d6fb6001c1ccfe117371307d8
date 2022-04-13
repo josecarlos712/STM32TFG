@@ -1,0 +1,31 @@
+/*
+ * generalTypes.c
+ *
+ *  Created on: Mar 29, 2022
+ *      Author: josec
+ */
+
+#include "generalTypes.h"
+
+void I_MovementInstruction_toString(MovementInstruction_t* pMovIns, char** buf) {
+
+	char* s = (char*)malloc(NUM_CHARS_PER_INSTRUCTION);
+
+	sprintf(s, "%d %d\0", pMovIns->instruction, pMovIns->duration);
+
+	*buf = s;
+}
+
+int I_CreateInstructionStruct(uint8_t instCode, uint8_t time, MovementInstruction_t* pMovOut) {
+	// Comprueba si el codigo de instruccion es valido
+	if(instCode < NUM_INSTRUCTIONS && time < I_MAX_TIME_EXECUTION) {
+		MovementInstruction_t* pMov = malloc(sizeof(MovementInstruction_t));
+		pMov->instruction = instCode;
+		pMov->duration = time;
+		pMovOut = pMov;
+	}
+	// Si no devuelve una instruccion NOPE
+	else {
+
+	}
+}

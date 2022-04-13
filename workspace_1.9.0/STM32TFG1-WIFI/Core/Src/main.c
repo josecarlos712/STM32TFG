@@ -60,11 +60,6 @@ const osThreadAttr_t defaultTask_attributes = {
   .stack_size = 128 * 4,
   .priority = (osPriority_t) osPriorityNormal,
 };
-/* Definitions for instructionQueue */
-osMessageQueueId_t instructionQueueHandle;
-const osMessageQueueAttr_t instructionQueue_attributes = {
-  .name = "instructionQueue"
-};
 /* Definitions for xSemaphoreSerial */
 osSemaphoreId_t xSemaphoreSerialHandle;
 const osSemaphoreAttr_t xSemaphoreSerial_attributes = {
@@ -153,10 +148,6 @@ int main(void)
   /* USER CODE BEGIN RTOS_TIMERS */
   /* start timers, add new ones, ... */
   /* USER CODE END RTOS_TIMERS */
-
-  /* Create the queue(s) */
-  /* creation of instructionQueue */
-  instructionQueueHandle = osMessageQueueNew (100, sizeof(MovementInstruction_t), &instructionQueue_attributes);
 
   /* USER CODE BEGIN RTOS_QUEUES */
   /* add queues, ... */
