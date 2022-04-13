@@ -19,7 +19,7 @@ void I_MovementInstruction_toString(MovementInstruction_t *pMovIns, char **buf) 
 uint8_t I_CreateInstructionStruct(uint8_t instCode, uint8_t time,
 		MovementInstruction_t *pMovOut) {
 	// Comprueba que todos los parametros sean correctos
-	if (instCode < NUM_INSTRUCTIONS) {
+	if (instCode < I_NUM_INSTRUCTIONS) {
 		if (time < I_MAX_TIME_EXECUTION) {
 			if (pMovOut != NULL) {
 				pMovOut->instruction = instCode;

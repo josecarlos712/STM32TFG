@@ -26,9 +26,9 @@
 void S_SendInstruction(uint8_t instCode, uint8_t time);
 
 /*
- *
+ * Envia una intruccion por el puerto serie dado:
+ * 	MovementInstruction_t *pMov - Struct de instruccion de movimiento
  */
-
-
+void S_SendInstructionStruct(MovementInstruction_t *pMov);
 
 #endif /* INC_HAL_INSTRUCTIONS_H_ */
