@@ -71,7 +71,8 @@ const osSemaphoreAttr_t xSemaphoreSerial_attributes = {
   .name = "xSemaphoreSerial"
 };
 /* USER CODE BEGIN PV */
-xTaskHandle serialTaskHandle;
+xTaskHandle serialRxTaskHandle;
+xTaskHandle serialTxTaskHandle;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -167,7 +168,8 @@ int main(void)
   defaultTaskHandle = osThreadNew(StartDefaultTask, NULL, &defaultTask_attributes);
 
   /* USER CODE BEGIN RTOS_THREADS */
-  xTaskCreate(serialTxTask, "tareaSerial", 128, NULL, 1, &serialTaskHandle);
+  xTaskCreate(serialRxTask, "tareaRxSerial", 128, NULL, 1, &serialRxTaskHandle);
+  xTaskCreate(serialTxTask, "tareaTxSerial", 128, NULL, 1, &serialTxTaskHandle);
   /* USER CODE END RTOS_THREADS */
 
   /* USER CODE BEGIN RTOS_EVENTS */

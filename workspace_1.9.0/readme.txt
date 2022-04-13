@@ -6,7 +6,7 @@ Crear formato de instrucciones en un struct. Función _string. HECHO
 
 Crear funciones de la API que envie instrucciones: adelante, atras, rota derecha, rota izquierda.  HECHO
 
-Crear cola que almacene la instrucciones y las vaya enviando una a una.
+Crear cola que almacene la instrucciones y las vaya enviando una a una. (Si el transmisor es mas rapido que el receptor la cola se llena y se pierden mensajes) HECHO
 
 Crear funciones de la API de más alto nivel que envie el coche a una posición determinada dado un vector de movimiento. (Por ahora según el algoritmo Manhatan)
 

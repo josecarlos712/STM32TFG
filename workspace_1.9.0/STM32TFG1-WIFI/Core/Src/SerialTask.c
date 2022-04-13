@@ -21,47 +21,35 @@ GETCHAR_PROTOTYPE {
 }
 
 void serialRxTask(void *parg) {
-
-	//char c;
-
-	while (1) {
-		MovementInstruction_t *pMov;
-		xQueueSend(xQueue, pMov, 1);
-		vTaskDelay(500);
-	}
-
-}
-
-/*void sendQeue() {
- while(1) {
- xQueueSend(xQueue, "H", 1);
- vTaskDelay(200);
- }
- }*/
-
-void serialTxTask(void *parg) {
 	uint8_t ins = I_FORDWARD;
 	uint8_t time = 10;
 
 	while (1) {
+		// Actualizo la instruccion a enviar
+		ins = (ins+1)%I_NUM_INSTRUCTIONS;
 		//Reservo memoria para el puntero de instruccion
 		MovementInstruction_t *pMov = malloc(sizeof(MovementInstruction_t));
-		//Recibo la instruccion desde la cola
-		xQueueReceive(osMessageQueueId_t, pMov, portMAX_DELAY);
-		//Envio la instruccion por el puerto serie
-		S_SendInstruction(pMov->instruction, pMov->time);
-		//Espero durante lo que tarda la instruccion
-		vTaskDelay(pMov->time * 100);
+		//Creo el struct que se va a enviar a la cola
+		I_CreateInstructionStruct(ins, time, pMov);
+		xQueueSend(instructionQueueHandle, pMov, 1);
+		//vTaskDelay(100);
 		//Libero la memoria del puntero de movimiento
 		free(pMov);
 	}
-	/*
-	 * TO-DO
-	 *
-	 * - Crear cola que saque uno a uno las instrucciones y las imprima
-	 * - Crear funciones de alto nivel que engloben varias instrucciones de movimiento
-	 */
 
+}
+
+void serialTxTask(void *parg) {
+
+	while (1) {
+		MovementInstruction_t pMov;
+		//Recibo la instruccion desde la cola
+		xQueueReceive(instructionQueueHandle, &pMov, portMAX_DELAY);
+		//Envio la instruccion por el puerto serie
+		S_SendInstructionStruct(&pMov);
+		//Espero durante lo que tarda la instruccion
+		vTaskDelay(pMov.duration * 100);
+	}
 }
 
 void CreateSerialObjects() {
