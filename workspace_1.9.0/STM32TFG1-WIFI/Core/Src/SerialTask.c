@@ -25,6 +25,8 @@ void serialRxTask(void *parg) {
 	uint8_t time = 10;
 
 	while (1) {
+		// Hago un movimiento para probar la funcion
+		Mov_MoveRelativeDirection(4, 2);
 		// Actualizo la instruccion a enviar
 		ins = (ins+1)%I_NUM_INSTRUCTIONS;
 		//Reservo memoria para el puntero de instruccion

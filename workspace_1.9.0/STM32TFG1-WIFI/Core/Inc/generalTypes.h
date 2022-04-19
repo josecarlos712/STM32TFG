@@ -15,7 +15,7 @@
 #include <string.h>
 //Definicion de constantes relativas a las instrucciones
 static const uint8_t I_NUM_INSTRUCTIONS = 5; //Numero total de instrucciones del repertorio de movimientos
-static const uint8_t I_MAX_TIME_EXECUTION = 100; //Tiempo maximo (en decimas) que puede ejecutarse una instruccion
+static const uint8_t I_MAX_TIME_EXECUTION = 250; //Tiempo maximo (en decimas) que puede ejecutarse una instruccion
 //Definiciones de codigos para cada movimiento
 static const uint8_t I_NOPE = 0; //NP
 static const uint8_t I_FORDWARD = 1; //FWD

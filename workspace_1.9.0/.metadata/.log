@@ -3064,3 +3064,26 @@ Remote communication error.  Target disconnected.: (undocumented errno 10061).
 java.lang.Exception: Remote communication error.  Target disconnected.: (undocumented errno 10061).
 	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:1013)
 	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:842)
+!SESSION 2022-04-19 16:49:17.463 -----------------------------------------------
+eclipse.buildId=Version 1.9.0
+java.version=11.0.11
+java.vendor=AdoptOpenJDK
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=es_ES
+Framework arguments:  C:\Programas\GitRepository\STM32TFG\workspace_1.9.0\STM32TFG1-WIFI\.project
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 C:\Programas\GitRepository\STM32TFG\workspace_1.9.0\STM32TFG1-WIFI\.project
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2022-04-19 16:49:23.059
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2022-04-19 16:49:23.150
+!MESSAGE Log4j initialized with config file C:\Programas\GitRepository\STM32TFG\workspace_1.9.0\.metadata\.log4j.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2022-04-19 16:49:30.692
+!MESSAGE Started RMI Server, listening on port 41337
+
+!ENTRY org.eclipse.cdt.core 1 0 2022-04-19 16:49:46.919
+!MESSAGE Indexed 'STM32TFG1-WIFI' (47 sources, 148 headers) in 5,94 sec: 16.856 declarations; 99.261 references; 3 unresolved inclusions; 156 syntax errors; 172 unresolved names (0,15 %)
+
+!ENTRY org.eclipse.core.net 4 0 2022-04-19 16:49:54.272
+!MESSAGE WinHttp.GetProxyForUrl for pac failed with error 'Controlador no válido.
+' #6.

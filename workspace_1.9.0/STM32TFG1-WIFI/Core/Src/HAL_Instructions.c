@@ -41,3 +41,18 @@ void S_SendInstructionStruct(MovementInstruction_t *pMov) {
 	//Devuelvo el control del puerto serie
 	xSemaphoreGive(xSemaphoreSerialHandle);
 }
+
+void Mov_MoveRelativeDirection(int x, int y) {
+	// Se hace una conversion de centrimetros a segundos (decimas de segundo) (el factor aún está por determinar mediante una calibración)
+	float tx = x * MOV_SCALE_MOVEMENT_FACTOR;
+	float ty = y * MOV_SCALE_MOVEMENT_FACTOR;
+	// Se decide hacia donde será el giro. Se intentará siempre ir hacia adelante pero se prioriza que el tiempo de giro sea el menor posible
+	uint8_t giro;
+	if(x != 0) {
+		if (x > 0) {
+			giro = I_ROTATE_CLOCKWISE;
+		} else {
+			giro = I_ROTATE_COUNTERCLOCKWISE;
+		}
+	}
+}
