@@ -1,3 +1,4 @@
 ../Core/Src/HAL_Instructions.c:14:6:S_SendInstruction	24	static
 ../Core/Src/HAL_Instructions.c:32:6:S_SendInstructionStruct	24	static
-../Core/Src/HAL_Instructions.c:45:6:Mov_MoveDirection	24	static
+../Core/Src/HAL_Instructions.c:45:6:S_SendInstructionToQueue	24	static
+../Core/Src/HAL_Instructions.c:56:6:Mov_MoveRelativeDirection	32	static

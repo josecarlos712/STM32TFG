@@ -28,6 +28,15 @@ static const float MOV_SCALE_MOVEMENT_FACTOR = 2.0f;
 void S_SendInstruction(uint8_t instCode, uint8_t time);
 
 /*
+ * Envia una instruccion a la cola de instrucciones:
+ * 	int instCode - Codigo numerico de la instruccion (generalTypes.h)
+ * 	int time - Tiempo en decimas de segundo
+ *
+ * 	Hay que liberar la memoria reservada por malloc en la funcion I_CreateInstructionStruct.
+ */
+void S_SendInstructionToQueue(uint8_t instCode, uint8_t time);
+
+/*
  * Envia una intruccion por el puerto serie dado:
  * 	MovementInstruction_t *pMov - Struct de instruccion de movimiento
  */
@@ -43,7 +52,7 @@ void S_SendInstructionStruct(MovementInstruction_t *pMov);
 void Mov_MoveRelativeDirection(int x, int y);
 
 /*
- * TO-DO. Funcion de movimiento Mov_MoveDirection con un sistema de referencia absoluto en vez de relativo, estableciendo este sistema con al iniciar el sistema.
+ * TO-DO. Funcion de movimiento Mov_MoveDirection con un sistema de referencia absoluto en vez de relativo, estableciendo este sistema con al iniciar el programa.
  */
 
 #endif /* INC_HAL_INSTRUCTIONS_H_ */

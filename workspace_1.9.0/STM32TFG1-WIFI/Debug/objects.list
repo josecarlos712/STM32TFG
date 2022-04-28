@@ -1,4 +1,5 @@
 "./Core/Src/HAL_Instructions.o"
+"./Core/Src/MathFunctions.o"
 "./Core/Src/SerialTask.o"
 "./Core/Src/freertos.o"
 "./Core/Src/generalTypes.o"

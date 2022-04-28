@@ -21,22 +21,16 @@ GETCHAR_PROTOTYPE {
 }
 
 void serialRxTask(void *parg) {
-	uint8_t ins = I_FORDWARD;
-	uint8_t time = 10;
+	//uint8_t ins = I_FORDWARD;
+	//uint8_t time = 10;
 
 	while (1) {
 		// Hago un movimiento para probar la funcion
 		Mov_MoveRelativeDirection(4, 2);
 		// Actualizo la instruccion a enviar
-		ins = (ins+1)%I_NUM_INSTRUCTIONS;
-		//Reservo memoria para el puntero de instruccion
-		MovementInstruction_t *pMov = malloc(sizeof(MovementInstruction_t));
-		//Creo el struct que se va a enviar a la cola
-		I_CreateInstructionStruct(ins, time, pMov);
-		xQueueSend(instructionQueueHandle, pMov, 1);
-		//vTaskDelay(100);
-		//Libero la memoria del puntero de movimiento
-		free(pMov);
+		//ins = (ins+1)%I_NUM_INSTRUCTIONS;
+		// Delay
+		vTaskDelay(3000);
 	}
 
 }
@@ -49,8 +43,6 @@ void serialTxTask(void *parg) {
 		xQueueReceive(instructionQueueHandle, &pMov, portMAX_DELAY);
 		//Envio la instruccion por el puerto serie
 		S_SendInstructionStruct(&pMov);
-		//Espero durante lo que tarda la instruccion
-		vTaskDelay(pMov.duration * 100);
 	}
 }
 
@@ -80,6 +72,6 @@ void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart) {
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
 	//char c;
 	//c = HAL_UART_Receive_IT(&huart1, (uint8_t*) &c, 1);
-	//xQueueSendToBackFromISR(xQueue, &c, NULL);
+//xQueueSendToBackFromISR(xQueue, &c, NULL);
 }
 

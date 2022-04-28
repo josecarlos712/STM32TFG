@@ -22,7 +22,7 @@ void S_SendInstruction(uint8_t instCode, uint8_t time) {
 	while (xSemaphoreTake(xSemaphoreSerialHandle, portMAX_DELAY) != pdTRUE)
 		;
 	//Envio el struct por el puerto serie
-	printf("%s\n\r", s_mov);
+	printf("%s\n", s_mov);
 	//Devuelvo el control del puerto serie
 	xSemaphoreGive(xSemaphoreSerialHandle);
 	//Libero la memoria reservada por malloc
@@ -37,22 +37,40 @@ void S_SendInstructionStruct(MovementInstruction_t *pMov) {
 	while (xSemaphoreTake(xSemaphoreSerialHandle, portMAX_DELAY) != pdTRUE)
 		;
 	//Envio el struct por el puerto serie
-	printf("%s\n\r", s_mov);
+	printf("%s\n", s_mov);
 	//Devuelvo el control del puerto serie
 	xSemaphoreGive(xSemaphoreSerialHandle);
 }
 
+void S_SendInstructionToQueue(uint8_t instCode, uint8_t time) {
+	//Reservo memoria para el puntero de instruccion
+	MovementInstruction_t *pMov = malloc(sizeof(MovementInstruction_t));
+	//Creo el struct que se va a enviar a la cola
+	I_CreateInstructionStruct(instCode, time, pMov);
+	xQueueSend(instructionQueueHandle, pMov, 1);
+	//vTaskDelay(100);
+	//Libero la memoria del puntero de movimiento
+	free(pMov);
+}
+
 void Mov_MoveRelativeDirection(int x, int y) {
 	// Se hace una conversion de centrimetros a segundos (decimas de segundo) (el factor aún está por determinar mediante una calibración)
-	float tx = x * MOV_SCALE_MOVEMENT_FACTOR;
-	float ty = y * MOV_SCALE_MOVEMENT_FACTOR;
-	// Se decide hacia donde será el giro. Se intentará siempre ir hacia adelante pero se prioriza que el tiempo de giro sea el menor posible
-	uint8_t giro;
-	if(x != 0) {
-		if (x > 0) {
-			giro = I_ROTATE_CLOCKWISE;
-		} else {
-			giro = I_ROTATE_COUNTERCLOCKWISE;
-		}
+	uint8_t tx = ((float) x * MOV_SCALE_MOVEMENT_FACTOR);
+	uint8_t ty = ((float) y * MOV_SCALE_MOVEMENT_FACTOR);
+	// Se envian los movimientos a la cola
+	// Movimiento frontal
+	if (y > 0) {
+		S_SendInstructionToQueue(I_FORDWARD, ty);
+	} else if (y < 0) {
+		S_SendInstructionToQueue(I_BACKWARD, ty);
 	}
+	// Giro
+	// Se decide hacia donde será el giro. Se intentará siempre ir hacia adelante pero se prioriza que el tiempo de giro sea el menor posible
+	if (x > 0) {
+		S_SendInstructionToQueue(I_ROTATE_CLOCKWISE, I_90DEGREES_ROTATION_TIME);
+	} else if (x < 0) {
+		S_SendInstructionToQueue(I_ROTATE_COUNTERCLOCKWISE, I_90DEGREES_ROTATION_TIME);
+	}
+	// Movimiento lateral
+	S_SendInstructionToQueue(I_FORDWARD, tx);
 }
