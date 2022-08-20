@@ -2,10 +2,10 @@
 
 PUTCHAR_PROTOTYPE {
 
-	while (HAL_OK != HAL_UART_Transmit(&huart1, (uint8_t*) &ch, 1, 30000)) {
+	//xSemaphoreTake(xSemaphoreSerialHandle, portMAX_DELAY);
+	while (HAL_OK != HAL_UART_Transmit(&huart4, (uint8_t*) &ch, 1, 30000)) {
 		;
 	}
-	//xSemaphoreTake(xSemaphore, portMAX_DELAY);
 	//HAL_UART_Transmit_IT(&huart1, (uint8_t*) &ch, 1);
 	return ch;
 
@@ -14,27 +14,29 @@ PUTCHAR_PROTOTYPE {
 GETCHAR_PROTOTYPE {
 
 	uint8_t ch = 0;
-	while (HAL_OK != HAL_UART_Receive(&huart1, (uint8_t*) &ch, 1, 30000)) {
+	while (HAL_OK != HAL_UART_Receive(&huart4, (uint8_t*) &ch, 1, 30000)) {
 		;
 	}
 	return ch;
 }
 
 void serialRxTask(void *parg) {
-	uint8_t ins = I_FORDWARD;
-	uint8_t time = 10;
+	uint8_t ins = 0;
+	uint8_t time = 20;
+	uint8_t i = 0;
 
-	while (1) {
-		// Actualizo la instruccion a enviar
-		ins = (ins+1)%I_NUM_INSTRUCTIONS;
+	while (i < 25) {
 		//Reservo memoria para el puntero de instruccion
 		MovementInstruction_t *pMov = malloc(sizeof(MovementInstruction_t));
 		//Creo el struct que se va a enviar a la cola
 		I_CreateInstructionStruct(ins, time, pMov);
 		xQueueSend(instructionQueueHandle, pMov, 1);
-		//vTaskDelay(100);
+		vTaskDelay(1000);
 		//Libero la memoria del puntero de movimiento
 		free(pMov);
+		// Actualizo la instruccion a enviar
+		ins = (ins+1)%I_NUM_INSTRUCTIONS;
+		i++;
 	}
 
 }
@@ -48,7 +50,8 @@ void serialTxTask(void *parg) {
 		//Envio la instruccion por el puerto serie
 		S_SendInstructionStruct(&pMov);
 		//Espero durante lo que tarda la instruccion
-		vTaskDelay(pMov.duration * 100);
+		//vTaskDelay(pMov.duration * 100);
+		vTaskDelay(50);
 	}
 }
 
@@ -70,7 +73,7 @@ void CreateSerialTask() {
 
 void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart) {
 	//BaseType_t hasWaken;
-	//xSemaphoreGiveFromISR(xSemaphore, &hasWaken);
+	//xSemaphoreGiveFromISR(xSemaphoreSerialHandle, &hasWaken);
 	//portYIELD_FROM_ISR(hasWaken);
 
 }

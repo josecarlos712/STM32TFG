@@ -16,7 +16,7 @@
 #include "cmsis_os2.h"
 #include "semphr.h"
 
-extern UART_HandleTypeDef huart1;
+extern UART_HandleTypeDef huart4;
 extern osSemaphoreId_t xSemaphoreSerialHandle;
 extern osMessageQueueId_t instructionQueueHandle;
 
