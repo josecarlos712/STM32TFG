@@ -1,16 +1,30 @@
 #include "SerialTask.h"
 
+
 PUTCHAR_PROTOTYPE {
 
 	//xSemaphoreTake(xSemaphoreSerialHandle, portMAX_DELAY);
-	while (HAL_OK != HAL_UART_Transmit(&huart4, (uint8_t*) &ch, 1, 30000)) {
+	while (HAL_OK != HAL_UART_Transmit(&huart1, (uint8_t*) &ch, 1, 30000)) {
 		;
 	}
+	while (HAL_OK != HAL_UART_Transmit(&huart4, (uint8_t*) &ch, 1, 30000)) {
+			;
+		}
 	//HAL_UART_Transmit_IT(&huart1, (uint8_t*) &ch, 1);
 	return ch;
 
 }
 
+/*
+PUTCHAR_PROTOTYPE {
+	//xSemaphoreTake(xSemaphoreSerialHandle, portMAX_DELAY);
+	while (HAL_OK != HAL_UART_Transmit_IT(&huart1, (uint8_t*) &ch, 1))
+		HAL_UART_Transmit(&huart1, (uint8_t*) &ch, 1, 30000);
+
+	return ch;
+}
+*/
+/*
 GETCHAR_PROTOTYPE {
 
 	uint8_t ch = 0;
@@ -19,6 +33,16 @@ GETCHAR_PROTOTYPE {
 	}
 	return ch;
 }
+
+
+GETCHAR_PROTOTYPE {
+
+	uint8_t ch = 0;
+	while (HAL_OK != HAL_UART_Receive(&huart4, (uint8_t*) &ch, 1, 30000)) {
+		;
+	}
+	return ch;
+}*/
 
 void serialRxTask(void *parg) {
 	uint8_t ins = 0;
@@ -64,23 +88,53 @@ void CreateSerialObjects() {
 }
 
 void CreateSerialTask() {
-
+	xTaskCreate(TareaWebServer, "TareaWebServer", 256, NULL, 1, NULL);
 	//xTaskCreate(serialTxTask, "serialTxTask", 256, NULL, 1,
 	//NULL);
 	//xTaskCreate(serialRxTask, "serialRxTask", 256, NULL, 1,
 	//NULL);
 }
 
-void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart) {
-	//BaseType_t hasWaken;
-	//xSemaphoreGiveFromISR(xSemaphoreSerialHandle, &hasWaken);
-	//portYIELD_FROM_ISR(hasWaken);
+void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)
+{
+	static signed long xHigherPriorityTaskWoken = pdFALSE;
+
+	xSemaphoreGiveFromISR(xSemaphore, xHigherPriorityTaskWoken);
+	portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
 
 }
+/*
+int __io_putchar(int ch)
+{
+	BaseType_t status = xSemaphoreTake(xSemaphore, 0xffff);
 
-void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
-	//char c;
-	//c = HAL_UART_Receive_IT(&huart1, (uint8_t*) &c, 1);
-	//xQueueSendToBackFromISR(xQueue, &c, NULL);
+	HAL_UART_Transmit_IT(&huart4, (uint8_t*) &ch, 1);
+
+	//while(HAL_OK != HAL_UART_Transmit(&huart1, (uint8_t*)&ch, 1, 30000))
+	//{
+	//	;
+	//}
+	return ch;
+}
+*/
+
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+	static signed long xHigherPriorityTaskWoken = pdFALSE;
+
+	portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
+}
+
+int __io_getchar(void)
+{
+	uint8_t ch = 0;
+
+	//while(HAL_OK != HAL_UART_Receive(&huart1, &ch, 1, 30000))
+	//{
+	//	;
+	//}
+	HAL_UART_Receive(&huart1, &ch, 1, 0);
+
+	return ch;
 }
 

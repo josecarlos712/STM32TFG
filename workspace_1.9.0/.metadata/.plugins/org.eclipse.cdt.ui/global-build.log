@@ -1,204 +1,352 @@
-20:43:51 **** Incremental Build of configuration Debug for project STM32TFG1-WIFI ****
+19:01:59 **** Incremental Build of configuration Debug for project STM32TFG1-WIFI ****
 make -j12 all 
-arm-none-eabi-gcc "../Core/Src/SerialTask.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L475xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/SerialTask.d" -MT"Core/Src/SerialTask.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/SerialTask.o"
+arm-none-eabi-gcc "../Core/Src/SerialTask.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L475xx -c -I../Core/Inc -I../LibWIFI/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/SerialTask.d" -MT"Core/Src/SerialTask.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/SerialTask.o"
+In file included from ../Core/Inc/SerialTask.h:17,
+                 from ../Core/Inc/HAL_Instructions.h:17,
+                 from ../Core/Inc/SerialTask.h:13,
+                 from ../Core/Src/SerialTask.c:1:
+../Core/Src/SerialTask.c: In function 'HAL_UART_TxCpltCallback':
+../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h:624:125: warning: passing argument 2 of 'xQueueGiveFromISR' makes pointer from integer without a cast [-Wint-conversion]
+  624 | #define xSemaphoreGiveFromISR( xSemaphore, pxHigherPriorityTaskWoken ) xQueueGiveFromISR( ( QueueHandle_t ) ( xSemaphore ), ( pxHigherPriorityTaskWoken ) )
+      |                                                                                                                             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                                                                                             |
+      |                                                                                                                             long int
+../Core/Src/SerialTask.c:99:2: note: in expansion of macro 'xSemaphoreGiveFromISR'
+   99 |  xSemaphoreGiveFromISR(xSemaphore, xHigherPriorityTaskWoken);
+      |  ^~~~~~~~~~~~~~~~~~~~~
+In file included from ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h:35,
+                 from ../Core/Inc/SerialTask.h:17,
+                 from ../Core/Inc/HAL_Instructions.h:17,
+                 from ../Core/Inc/SerialTask.h:13,
+                 from ../Core/Src/SerialTask.c:1:
+../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h:1296:72: note: expected 'BaseType_t * const' {aka 'long int * const'} but argument is of type 'long int'
+ 1296 | BaseType_t xQueueGiveFromISR( QueueHandle_t xQueue, BaseType_t * const pxHigherPriorityTaskWoken ) PRIVILEGED_FUNCTION;
+      |                                                     ~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/SerialTask.c: In function '__io_putchar':
+../Core/Src/SerialTask.c:106:13: warning: unused variable 'status' [-Wunused-variable]
+  106 |  BaseType_t status = xSemaphoreTake(xSemaphore, 0xffff);
+      |             ^~~~~~
 arm-none-eabi-gcc -o "STM32TFG1-WIFI.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\JoseCarlos\Programacion\STM32CubeIDE_Repositories\workspace_1.9.0\STM32TFG1-WIFI\STM32L475VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32TFG1-WIFI.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 Finished building target: STM32TFG1-WIFI.elf
  
 arm-none-eabi-size   STM32TFG1-WIFI.elf 
 arm-none-eabi-objdump -h -S  STM32TFG1-WIFI.elf  > "STM32TFG1-WIFI.list"
    text	   data	    bss	    dec	    hex	filename
-  40780	    124	   9924	  50828	   c68c	STM32TFG1-WIFI.elf
+  59600	    124	  14396	  74120	  12188	STM32TFG1-WIFI.elf
 Finished building: default.size.stdout
  
 Finished building: STM32TFG1-WIFI.list
  
-20:43:57 **** Incremental Build of configuration Debug for project STM32TFG1-WIFI ****
+19:02:06 **** Incremental Build of configuration Debug for project STM32TFG1-WIFI ****
 make -j12 all 
 arm-none-eabi-size   STM32TFG1-WIFI.elf 
    text	   data	    bss	    dec	    hex	filename
-  40780	    124	   9924	  50828	   c68c	STM32TFG1-WIFI.elf
+  59600	    124	  14396	  74120	  12188	STM32TFG1-WIFI.elf
 Finished building: default.size.stdout
  
-20:45:13 **** Incremental Build of configuration Debug for project STM32TFG1-WIFI ****
+13:27:57 **** Incremental Build of configuration Debug for project STM32TFG1-WIFI ****
 make -j12 all 
-arm-none-eabi-size   STM32TFG1-WIFI.elf 
-   text	   data	    bss	    dec	    hex	filename
-  40780	    124	   9924	  50828	   c68c	STM32TFG1-WIFI.elf
-Finished building: default.size.stdout
- 
-20:49:51 **** Incremental Build of configuration Debug for project STM32TFG1-WIFI ****
-make -j12 all 
-arm-none-eabi-size   STM32TFG1-WIFI.elf 
-   text	   data	    bss	    dec	    hex	filename
-  40780	    124	   9924	  50828	   c68c	STM32TFG1-WIFI.elf
-Finished building: default.size.stdout
- 
-20:52:40 **** Incremental Build of configuration Debug for project STM32TFG1-WIFI ****
-make -j12 all 
-arm-none-eabi-gcc "../Core/Src/SerialTask.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L475xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/SerialTask.d" -MT"Core/Src/SerialTask.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/SerialTask.o"
+arm-none-eabi-gcc "../Core/Src/HAL_Instructions.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L475xx -c -I../Core/Inc -I../LibWIFI/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/HAL_Instructions.d" -MT"Core/Src/HAL_Instructions.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/HAL_Instructions.o"
+arm-none-eabi-gcc "../Core/Src/SerialTask.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L475xx -c -I../Core/Inc -I../LibWIFI/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/SerialTask.d" -MT"Core/Src/SerialTask.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/SerialTask.o"
+arm-none-eabi-gcc "../Core/Src/Tareas.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L475xx -c -I../Core/Inc -I../LibWIFI/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/Tareas.d" -MT"Core/Src/Tareas.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/Tareas.o"
+arm-none-eabi-gcc "../Core/Src/freertos.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L475xx -c -I../Core/Inc -I../LibWIFI/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/freertos.d" -MT"Core/Src/freertos.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/freertos.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L475xx -c -I../Core/Inc -I../LibWIFI/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/stm32l4xx_hal_msp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L475xx -c -I../Core/Inc -I../LibWIFI/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/stm32l4xx_hal_msp.d" -MT"Core/Src/stm32l4xx_hal_msp.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32l4xx_hal_msp.o"
+arm-none-eabi-gcc "../Core/Src/stm32l4xx_it.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L475xx -c -I../Core/Inc -I../LibWIFI/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/stm32l4xx_it.d" -MT"Core/Src/stm32l4xx_it.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32l4xx_it.o"
+arm-none-eabi-gcc "../Core/Src/web_server.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L475xx -c -I../Core/Inc -I../LibWIFI/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/web_server.d" -MT"Core/Src/web_server.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/web_server.o"
+In file included from ../Core/Inc/SerialTask.h:17,
+                 from ../Core/Inc/HAL_Instructions.h:17,
+                 from ../Core/Inc/SerialTask.h:13,
+                 from ../Core/Src/SerialTask.c:1:
+../Core/Src/SerialTask.c: In function 'HAL_UART_TxCpltCallback':
+../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h:624:125: warning: passing argument 2 of 'xQueueGiveFromISR' makes pointer from integer without a cast [-Wint-conversion]
+  624 | #define xSemaphoreGiveFromISR( xSemaphore, pxHigherPriorityTaskWoken ) xQueueGiveFromISR( ( QueueHandle_t ) ( xSemaphore ), ( pxHigherPriorityTaskWoken ) )
+      |                                                                                                                             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                                                                                             |
+      |                                                                                                                             long int
+../Core/Src/SerialTask.c:99:2: note: in expansion of macro 'xSemaphoreGiveFromISR'
+   99 |  xSemaphoreGiveFromISR(xSemaphore, xHigherPriorityTaskWoken);
+      |  ^~~~~~~~~~~~~~~~~~~~~
+In file included from ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h:35,
+                 from ../Core/Inc/SerialTask.h:17,
+                 from ../Core/Inc/HAL_Instructions.h:17,
+                 from ../Core/Inc/SerialTask.h:13,
+                 from ../Core/Src/SerialTask.c:1:
+../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h:1296:72: note: expected 'BaseType_t * const' {aka 'long int * const'} but argument is of type 'long int'
+ 1296 | BaseType_t xQueueGiveFromISR( QueueHandle_t xQueue, BaseType_t * const pxHigherPriorityTaskWoken ) PRIVILEGED_FUNCTION;
+      |                                                     ~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/SerialTask.c: In function '__io_putchar':
+../Core/Src/SerialTask.c:106:13: warning: unused variable 'status' [-Wunused-variable]
+  106 |  BaseType_t status = xSemaphoreTake(xSemaphore, 0xffff);
+      |             ^~~~~~
+../Core/Src/web_server.c: In function 'WebServerProcess':
+../Core/Src/web_server.c:182:12: warning: 'temp' may be used uninitialized in this function [-Wmaybe-uninitialized]
+  182 |         if(SendWebPage(LedState, temp) != WIFI_STATUS_OK)
+      |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~
 arm-none-eabi-gcc -o "STM32TFG1-WIFI.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\JoseCarlos\Programacion\STM32CubeIDE_Repositories\workspace_1.9.0\STM32TFG1-WIFI\STM32L475VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32TFG1-WIFI.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 Finished building target: STM32TFG1-WIFI.elf
  
 arm-none-eabi-size   STM32TFG1-WIFI.elf 
 arm-none-eabi-objdump -h -S  STM32TFG1-WIFI.elf  > "STM32TFG1-WIFI.list"
    text	   data	    bss	    dec	    hex	filename
-  40780	    124	   9924	  50828	   c68c	STM32TFG1-WIFI.elf
+  59600	    124	  14396	  74120	  12188	STM32TFG1-WIFI.elf
 Finished building: default.size.stdout
  
 Finished building: STM32TFG1-WIFI.list
  
-20:54:40 **** Incremental Build of configuration Debug for project STM32TFG1-WIFI ****
+13:30:31 **** Incremental Build of configuration Debug for project STM32TFG1-WIFI ****
 make -j12 all 
-arm-none-eabi-gcc "../Core/Src/HAL_Instructions.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L475xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/HAL_Instructions.d" -MT"Core/Src/HAL_Instructions.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/HAL_Instructions.o"
-arm-none-eabi-gcc "../Core/Src/SerialTask.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L475xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/SerialTask.d" -MT"Core/Src/SerialTask.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/SerialTask.o"
+arm-none-eabi-gcc "../Core/Src/SerialTask.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L475xx -c -I../Core/Inc -I../LibWIFI/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/SerialTask.d" -MT"Core/Src/SerialTask.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/SerialTask.o"
+In file included from ../Core/Inc/SerialTask.h:17,
+                 from ../Core/Inc/HAL_Instructions.h:17,
+                 from ../Core/Inc/SerialTask.h:13,
+                 from ../Core/Src/SerialTask.c:1:
+../Core/Src/SerialTask.c: In function 'HAL_UART_TxCpltCallback':
+../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h:624:125: warning: passing argument 2 of 'xQueueGiveFromISR' makes pointer from integer without a cast [-Wint-conversion]
+  624 | #define xSemaphoreGiveFromISR( xSemaphore, pxHigherPriorityTaskWoken ) xQueueGiveFromISR( ( QueueHandle_t ) ( xSemaphore ), ( pxHigherPriorityTaskWoken ) )
+      |                                                                                                                             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                                                                                             |
+      |                                                                                                                             long int
+../Core/Src/SerialTask.c:99:2: note: in expansion of macro 'xSemaphoreGiveFromISR'
+   99 |  xSemaphoreGiveFromISR(xSemaphore, xHigherPriorityTaskWoken);
+      |  ^~~~~~~~~~~~~~~~~~~~~
+In file included from ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h:35,
+                 from ../Core/Inc/SerialTask.h:17,
+                 from ../Core/Inc/HAL_Instructions.h:17,
+                 from ../Core/Inc/SerialTask.h:13,
+                 from ../Core/Src/SerialTask.c:1:
+../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h:1296:72: note: expected 'BaseType_t * const' {aka 'long int * const'} but argument is of type 'long int'
+ 1296 | BaseType_t xQueueGiveFromISR( QueueHandle_t xQueue, BaseType_t * const pxHigherPriorityTaskWoken ) PRIVILEGED_FUNCTION;
+      |                                                     ~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/SerialTask.c: In function '__io_putchar':
+../Core/Src/SerialTask.c:106:13: warning: unused variable 'status' [-Wunused-variable]
+  106 |  BaseType_t status = xSemaphoreTake(xSemaphore, 0xffff);
+      |             ^~~~~~
 arm-none-eabi-gcc -o "STM32TFG1-WIFI.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\JoseCarlos\Programacion\STM32CubeIDE_Repositories\workspace_1.9.0\STM32TFG1-WIFI\STM32L475VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32TFG1-WIFI.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 Finished building target: STM32TFG1-WIFI.elf
  
 arm-none-eabi-size   STM32TFG1-WIFI.elf 
 arm-none-eabi-objdump -h -S  STM32TFG1-WIFI.elf  > "STM32TFG1-WIFI.list"
    text	   data	    bss	    dec	    hex	filename
-  40268	    124	   9924	  50316	   c48c	STM32TFG1-WIFI.elf
+  59600	    124	  14396	  74120	  12188	STM32TFG1-WIFI.elf
 Finished building: default.size.stdout
  
 Finished building: STM32TFG1-WIFI.list
  
-20:56:10 **** Incremental Build of configuration Debug for project STM32TFG1-WIFI ****
+13:32:56 **** Incremental Build of configuration Debug for project STM32TFG1-WIFI ****
 make -j12 all 
-arm-none-eabi-gcc "../Core/Src/HAL_Instructions.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L475xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/HAL_Instructions.d" -MT"Core/Src/HAL_Instructions.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/HAL_Instructions.o"
+arm-none-eabi-gcc "../Core/Src/SerialTask.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L475xx -c -I../Core/Inc -I../LibWIFI/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/SerialTask.d" -MT"Core/Src/SerialTask.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/SerialTask.o"
+In file included from ../Core/Inc/SerialTask.h:17,
+                 from ../Core/Inc/HAL_Instructions.h:17,
+                 from ../Core/Inc/SerialTask.h:13,
+                 from ../Core/Src/SerialTask.c:1:
+../Core/Src/SerialTask.c: In function 'HAL_UART_TxCpltCallback':
+../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h:624:125: warning: passing argument 2 of 'xQueueGiveFromISR' makes pointer from integer without a cast [-Wint-conversion]
+  624 | #define xSemaphoreGiveFromISR( xSemaphore, pxHigherPriorityTaskWoken ) xQueueGiveFromISR( ( QueueHandle_t ) ( xSemaphore ), ( pxHigherPriorityTaskWoken ) )
+      |                                                                                                                             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                                                                                             |
+      |                                                                                                                             long int
+../Core/Src/SerialTask.c:110:2: note: in expansion of macro 'xSemaphoreGiveFromISR'
+  110 |  xSemaphoreGiveFromISR(xSemaphore, xHigherPriorityTaskWoken);
+      |  ^~~~~~~~~~~~~~~~~~~~~
+In file included from ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h:35,
+                 from ../Core/Inc/SerialTask.h:17,
+                 from ../Core/Inc/HAL_Instructions.h:17,
+                 from ../Core/Inc/SerialTask.h:13,
+                 from ../Core/Src/SerialTask.c:1:
+../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h:1296:72: note: expected 'BaseType_t * const' {aka 'long int * const'} but argument is of type 'long int'
+ 1296 | BaseType_t xQueueGiveFromISR( QueueHandle_t xQueue, BaseType_t * const pxHigherPriorityTaskWoken ) PRIVILEGED_FUNCTION;
+      |                                                     ~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/SerialTask.c: At top level:
+../Core/Src/SerialTask.c:115:5: error: redefinition of '__io_putchar'
+  115 | int __io_putchar(int ch)
+      |     ^~~~~~~~~~~~
+In file included from ../Core/Inc/HAL_Instructions.h:17,
+                 from ../Core/Inc/SerialTask.h:13,
+                 from ../Core/Src/SerialTask.c:1:
+../Core/Inc/SerialTask.h:9:31: note: previous definition of '__io_putchar' was here
+    9 | #define PUTCHAR_PROTOTYPE int __io_putchar(int ch)
+      |                               ^~~~~~~~~~~~
+../Core/Src/SerialTask.c:44:1: note: in expansion of macro 'PUTCHAR_PROTOTYPE'
+   44 | PUTCHAR_PROTOTYPE {
+      | ^~~~~~~~~~~~~~~~~
+../Core/Src/SerialTask.c: In function '__io_putchar':
+../Core/Src/SerialTask.c:117:13: warning: unused variable 'status' [-Wunused-variable]
+  117 |  BaseType_t status = xSemaphoreTake(xSemaphore, 0xffff);
+      |             ^~~~~~
+make: *** [Core/Src/subdir.mk:55: Core/Src/SerialTask.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+13:34:23 **** Incremental Build of configuration Debug for project STM32TFG1-WIFI ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/SerialTask.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L475xx -c -I../Core/Inc -I../LibWIFI/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/SerialTask.d" -MT"Core/Src/SerialTask.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/SerialTask.o"
+In file included from ../Core/Inc/SerialTask.h:17,
+                 from ../Core/Inc/HAL_Instructions.h:17,
+                 from ../Core/Inc/SerialTask.h:13,
+                 from ../Core/Src/SerialTask.c:1:
+../Core/Src/SerialTask.c: In function 'HAL_UART_TxCpltCallback':
+../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h:624:125: warning: passing argument 2 of 'xQueueGiveFromISR' makes pointer from integer without a cast [-Wint-conversion]
+  624 | #define xSemaphoreGiveFromISR( xSemaphore, pxHigherPriorityTaskWoken ) xQueueGiveFromISR( ( QueueHandle_t ) ( xSemaphore ), ( pxHigherPriorityTaskWoken ) )
+      |                                                                                                                             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                                                                                             |
+      |                                                                                                                             long int
+../Core/Src/SerialTask.c:110:2: note: in expansion of macro 'xSemaphoreGiveFromISR'
+  110 |  xSemaphoreGiveFromISR(xSemaphore, xHigherPriorityTaskWoken);
+      |  ^~~~~~~~~~~~~~~~~~~~~
+In file included from ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h:35,
+                 from ../Core/Inc/SerialTask.h:17,
+                 from ../Core/Inc/HAL_Instructions.h:17,
+                 from ../Core/Inc/SerialTask.h:13,
+                 from ../Core/Src/SerialTask.c:1:
+../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h:1296:72: note: expected 'BaseType_t * const' {aka 'long int * const'} but argument is of type 'long int'
+ 1296 | BaseType_t xQueueGiveFromISR( QueueHandle_t xQueue, BaseType_t * const pxHigherPriorityTaskWoken ) PRIVILEGED_FUNCTION;
+      |                                                     ~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~
 arm-none-eabi-gcc -o "STM32TFG1-WIFI.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\JoseCarlos\Programacion\STM32CubeIDE_Repositories\workspace_1.9.0\STM32TFG1-WIFI\STM32L475VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32TFG1-WIFI.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 Finished building target: STM32TFG1-WIFI.elf
  
 arm-none-eabi-size   STM32TFG1-WIFI.elf 
 arm-none-eabi-objdump -h -S  STM32TFG1-WIFI.elf  > "STM32TFG1-WIFI.list"
    text	   data	    bss	    dec	    hex	filename
-  40776	    124	   9924	  50824	   c688	STM32TFG1-WIFI.elf
+  58192	    124	  14388	  72704	  11c00	STM32TFG1-WIFI.elf
 Finished building: default.size.stdout
  
 Finished building: STM32TFG1-WIFI.list
  
-20:57:04 **** Incremental Build of configuration Debug for project STM32TFG1-WIFI ****
+13:35:27 **** Incremental Build of configuration Debug for project STM32TFG1-WIFI ****
 make -j12 all 
-arm-none-eabi-gcc "../Core/Src/HAL_Instructions.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L475xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/HAL_Instructions.d" -MT"Core/Src/HAL_Instructions.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/HAL_Instructions.o"
-../Core/Src/HAL_Instructions.c: In function 'S_SendInstruction':
-../Core/Src/HAL_Instructions.c:25:12: warning: embedded '\0' in format [-Wformat-contains-nul]
-   25 |  printf("%s\0", s_mov);
-      |            ^~
-../Core/Src/HAL_Instructions.c: In function 'S_SendInstructionStruct':
-../Core/Src/HAL_Instructions.c:40:12: warning: embedded '\0' in format [-Wformat-contains-nul]
-   40 |  printf("%s\0", s_mov);
-      |            ^~
+arm-none-eabi-gcc "../Core/Src/SerialTask.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L475xx -c -I../Core/Inc -I../LibWIFI/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/SerialTask.d" -MT"Core/Src/SerialTask.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/SerialTask.o"
+In file included from ../Core/Inc/SerialTask.h:17,
+                 from ../Core/Inc/HAL_Instructions.h:17,
+                 from ../Core/Inc/SerialTask.h:13,
+                 from ../Core/Src/SerialTask.c:1:
+../Core/Src/SerialTask.c: In function 'HAL_UART_TxCpltCallback':
+../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h:624:125: warning: passing argument 2 of 'xQueueGiveFromISR' makes pointer from integer without a cast [-Wint-conversion]
+  624 | #define xSemaphoreGiveFromISR( xSemaphore, pxHigherPriorityTaskWoken ) xQueueGiveFromISR( ( QueueHandle_t ) ( xSemaphore ), ( pxHigherPriorityTaskWoken ) )
+      |                                                                                                                             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                                                                                             |
+      |                                                                                                                             long int
+../Core/Src/SerialTask.c:99:2: note: in expansion of macro 'xSemaphoreGiveFromISR'
+   99 |  xSemaphoreGiveFromISR(xSemaphore, xHigherPriorityTaskWoken);
+      |  ^~~~~~~~~~~~~~~~~~~~~
+In file included from ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h:35,
+                 from ../Core/Inc/SerialTask.h:17,
+                 from ../Core/Inc/HAL_Instructions.h:17,
+                 from ../Core/Inc/SerialTask.h:13,
+                 from ../Core/Src/SerialTask.c:1:
+../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h:1296:72: note: expected 'BaseType_t * const' {aka 'long int * const'} but argument is of type 'long int'
+ 1296 | BaseType_t xQueueGiveFromISR( QueueHandle_t xQueue, BaseType_t * const pxHigherPriorityTaskWoken ) PRIVILEGED_FUNCTION;
+      |                                                     ~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~
 arm-none-eabi-gcc -o "STM32TFG1-WIFI.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\JoseCarlos\Programacion\STM32CubeIDE_Repositories\workspace_1.9.0\STM32TFG1-WIFI\STM32L475VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32TFG1-WIFI.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 Finished building target: STM32TFG1-WIFI.elf
  
 arm-none-eabi-size   STM32TFG1-WIFI.elf 
 arm-none-eabi-objdump -h -S  STM32TFG1-WIFI.elf  > "STM32TFG1-WIFI.list"
    text	   data	    bss	    dec	    hex	filename
-  40776	    124	   9924	  50824	   c688	STM32TFG1-WIFI.elf
+  58800	    124	  14388	  73312	  11e60	STM32TFG1-WIFI.elf
 Finished building: default.size.stdout
  
 Finished building: STM32TFG1-WIFI.list
  
-20:58:02 **** Incremental Build of configuration Debug for project STM32TFG1-WIFI ****
+13:36:41 **** Incremental Build of configuration Debug for project STM32TFG1-WIFI ****
 make -j12 all 
-arm-none-eabi-gcc "../Core/Src/HAL_Instructions.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L475xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/HAL_Instructions.d" -MT"Core/Src/HAL_Instructions.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/HAL_Instructions.o"
+arm-none-eabi-gcc "../Core/Src/SerialTask.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L475xx -c -I../Core/Inc -I../LibWIFI/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/SerialTask.d" -MT"Core/Src/SerialTask.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/SerialTask.o"
+In file included from ../Core/Inc/SerialTask.h:17,
+                 from ../Core/Inc/HAL_Instructions.h:17,
+                 from ../Core/Inc/SerialTask.h:13,
+                 from ../Core/Src/SerialTask.c:1:
+../Core/Src/SerialTask.c: In function 'HAL_UART_TxCpltCallback':
+../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h:624:125: warning: passing argument 2 of 'xQueueGiveFromISR' makes pointer from integer without a cast [-Wint-conversion]
+  624 | #define xSemaphoreGiveFromISR( xSemaphore, pxHigherPriorityTaskWoken ) xQueueGiveFromISR( ( QueueHandle_t ) ( xSemaphore ), ( pxHigherPriorityTaskWoken ) )
+      |                                                                                                                             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                                                                                             |
+      |                                                                                                                             long int
+../Core/Src/SerialTask.c:99:2: note: in expansion of macro 'xSemaphoreGiveFromISR'
+   99 |  xSemaphoreGiveFromISR(xSemaphore, xHigherPriorityTaskWoken);
+      |  ^~~~~~~~~~~~~~~~~~~~~
+In file included from ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h:35,
+                 from ../Core/Inc/SerialTask.h:17,
+                 from ../Core/Inc/HAL_Instructions.h:17,
+                 from ../Core/Inc/SerialTask.h:13,
+                 from ../Core/Src/SerialTask.c:1:
+../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h:1296:72: note: expected 'BaseType_t * const' {aka 'long int * const'} but argument is of type 'long int'
+ 1296 | BaseType_t xQueueGiveFromISR( QueueHandle_t xQueue, BaseType_t * const pxHigherPriorityTaskWoken ) PRIVILEGED_FUNCTION;
+      |                                                     ~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~
 arm-none-eabi-gcc -o "STM32TFG1-WIFI.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\JoseCarlos\Programacion\STM32CubeIDE_Repositories\workspace_1.9.0\STM32TFG1-WIFI\STM32L475VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32TFG1-WIFI.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 Finished building target: STM32TFG1-WIFI.elf
  
 arm-none-eabi-size   STM32TFG1-WIFI.elf 
 arm-none-eabi-objdump -h -S  STM32TFG1-WIFI.elf  > "STM32TFG1-WIFI.list"
    text	   data	    bss	    dec	    hex	filename
-  40268	    124	   9924	  50316	   c48c	STM32TFG1-WIFI.elf
+  58800	    124	  14388	  73312	  11e60	STM32TFG1-WIFI.elf
 Finished building: default.size.stdout
  
 Finished building: STM32TFG1-WIFI.list
  
-18:51:14 **** Incremental Build of configuration Debug for project STM32TFG1-WIFI ****
+13:37:46 **** Incremental Build of configuration Debug for project STM32TFG1-WIFI ****
 make -j12 all 
-arm-none-eabi-size   STM32TFG1-WIFI.elf 
-   text	   data	    bss	    dec	    hex	filename
-  40268	    124	   9924	  50316	   c48c	STM32TFG1-WIFI.elf
-Finished building: default.size.stdout
- 
-18:59:09 **** Incremental Build of configuration Debug for project STM32TFG1-WIFI ****
-make -j12 all 
-arm-none-eabi-gcc "../Core/Src/SerialTask.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L475xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/SerialTask.d" -MT"Core/Src/SerialTask.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/SerialTask.o"
+arm-none-eabi-gcc "../Core/Src/SerialTask.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L475xx -c -I../Core/Inc -I../LibWIFI/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/SerialTask.d" -MT"Core/Src/SerialTask.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/SerialTask.o"
+In file included from ../Core/Inc/SerialTask.h:17,
+                 from ../Core/Inc/HAL_Instructions.h:17,
+                 from ../Core/Inc/SerialTask.h:13,
+                 from ../Core/Src/SerialTask.c:1:
+../Core/Src/SerialTask.c: In function 'HAL_UART_TxCpltCallback':
+../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h:624:125: warning: passing argument 2 of 'xQueueGiveFromISR' makes pointer from integer without a cast [-Wint-conversion]
+  624 | #define xSemaphoreGiveFromISR( xSemaphore, pxHigherPriorityTaskWoken ) xQueueGiveFromISR( ( QueueHandle_t ) ( xSemaphore ), ( pxHigherPriorityTaskWoken ) )
+      |                                                                                                                             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                                                                                             |
+      |                                                                                                                             long int
+../Core/Src/SerialTask.c:99:2: note: in expansion of macro 'xSemaphoreGiveFromISR'
+   99 |  xSemaphoreGiveFromISR(xSemaphore, xHigherPriorityTaskWoken);
+      |  ^~~~~~~~~~~~~~~~~~~~~
+In file included from ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h:35,
+                 from ../Core/Inc/SerialTask.h:17,
+                 from ../Core/Inc/HAL_Instructions.h:17,
+                 from ../Core/Inc/SerialTask.h:13,
+                 from ../Core/Src/SerialTask.c:1:
+../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h:1296:72: note: expected 'BaseType_t * const' {aka 'long int * const'} but argument is of type 'long int'
+ 1296 | BaseType_t xQueueGiveFromISR( QueueHandle_t xQueue, BaseType_t * const pxHigherPriorityTaskWoken ) PRIVILEGED_FUNCTION;
+      |                                                     ~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~
 arm-none-eabi-gcc -o "STM32TFG1-WIFI.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\JoseCarlos\Programacion\STM32CubeIDE_Repositories\workspace_1.9.0\STM32TFG1-WIFI\STM32L475VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32TFG1-WIFI.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 Finished building target: STM32TFG1-WIFI.elf
  
 arm-none-eabi-size   STM32TFG1-WIFI.elf 
 arm-none-eabi-objdump -h -S  STM32TFG1-WIFI.elf  > "STM32TFG1-WIFI.list"
    text	   data	    bss	    dec	    hex	filename
-  40268	    124	   9924	  50316	   c48c	STM32TFG1-WIFI.elf
-Finished building: default.size.stdout
- 
-Finished building: STM32TFG1-WIFI.list
- 
-19:00:57 **** Incremental Build of configuration Debug for project STM32TFG1-WIFI ****
-make -j12 all 
-arm-none-eabi-gcc "../Core/Src/SerialTask.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L475xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/SerialTask.d" -MT"Core/Src/SerialTask.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/SerialTask.o"
-arm-none-eabi-gcc -o "STM32TFG1-WIFI.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\JoseCarlos\Programacion\STM32CubeIDE_Repositories\workspace_1.9.0\STM32TFG1-WIFI\STM32L475VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32TFG1-WIFI.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: STM32TFG1-WIFI.elf
- 
-arm-none-eabi-size   STM32TFG1-WIFI.elf 
-arm-none-eabi-objdump -h -S  STM32TFG1-WIFI.elf  > "STM32TFG1-WIFI.list"
-   text	   data	    bss	    dec	    hex	filename
-  40268	    124	   9924	  50316	   c48c	STM32TFG1-WIFI.elf
-Finished building: default.size.stdout
- 
-Finished building: STM32TFG1-WIFI.list
- 
-19:01:48 **** Incremental Build of configuration Debug for project STM32TFG1-WIFI ****
-make -j12 all 
-arm-none-eabi-gcc "../Core/Src/SerialTask.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L475xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/SerialTask.d" -MT"Core/Src/SerialTask.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/SerialTask.o"
-arm-none-eabi-gcc -o "STM32TFG1-WIFI.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\JoseCarlos\Programacion\STM32CubeIDE_Repositories\workspace_1.9.0\STM32TFG1-WIFI\STM32L475VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32TFG1-WIFI.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: STM32TFG1-WIFI.elf
- 
-arm-none-eabi-size   STM32TFG1-WIFI.elf 
-arm-none-eabi-objdump -h -S  STM32TFG1-WIFI.elf  > "STM32TFG1-WIFI.list"
-   text	   data	    bss	    dec	    hex	filename
-  40268	    124	   9924	  50316	   c48c	STM32TFG1-WIFI.elf
+  58192	    124	  14388	  72704	  11c00	STM32TFG1-WIFI.elf
 Finished building: default.size.stdout
  
 Finished building: STM32TFG1-WIFI.list
  
-19:02:21 **** Incremental Build of configuration Debug for project STM32TFG1-WIFI ****
+13:38:52 **** Incremental Build of configuration Debug for project STM32TFG1-WIFI ****
 make -j12 all 
-arm-none-eabi-gcc "../Core/Src/SerialTask.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L475xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/SerialTask.d" -MT"Core/Src/SerialTask.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/SerialTask.o"
+arm-none-eabi-gcc "../Core/Src/SerialTask.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L475xx -c -I../Core/Inc -I../LibWIFI/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/SerialTask.d" -MT"Core/Src/SerialTask.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/SerialTask.o"
+In file included from ../Core/Inc/SerialTask.h:17,
+                 from ../Core/Inc/HAL_Instructions.h:17,
+                 from ../Core/Inc/SerialTask.h:13,
+                 from ../Core/Src/SerialTask.c:1:
+../Core/Src/SerialTask.c: In function 'HAL_UART_TxCpltCallback':
+../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h:624:125: warning: passing argument 2 of 'xQueueGiveFromISR' makes pointer from integer without a cast [-Wint-conversion]
+  624 | #define xSemaphoreGiveFromISR( xSemaphore, pxHigherPriorityTaskWoken ) xQueueGiveFromISR( ( QueueHandle_t ) ( xSemaphore ), ( pxHigherPriorityTaskWoken ) )
+      |                                                                                                                             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                                                                                             |
+      |                                                                                                                             long int
+../Core/Src/SerialTask.c:102:2: note: in expansion of macro 'xSemaphoreGiveFromISR'
+  102 |  xSemaphoreGiveFromISR(xSemaphore, xHigherPriorityTaskWoken);
+      |  ^~~~~~~~~~~~~~~~~~~~~
+In file included from ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h:35,
+                 from ../Core/Inc/SerialTask.h:17,
+                 from ../Core/Inc/HAL_Instructions.h:17,
+                 from ../Core/Inc/SerialTask.h:13,
+                 from ../Core/Src/SerialTask.c:1:
+../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h:1296:72: note: expected 'BaseType_t * const' {aka 'long int * const'} but argument is of type 'long int'
+ 1296 | BaseType_t xQueueGiveFromISR( QueueHandle_t xQueue, BaseType_t * const pxHigherPriorityTaskWoken ) PRIVILEGED_FUNCTION;
+      |                                                     ~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~
 arm-none-eabi-gcc -o "STM32TFG1-WIFI.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\JoseCarlos\Programacion\STM32CubeIDE_Repositories\workspace_1.9.0\STM32TFG1-WIFI\STM32L475VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32TFG1-WIFI.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 Finished building target: STM32TFG1-WIFI.elf
  
 arm-none-eabi-size   STM32TFG1-WIFI.elf 
 arm-none-eabi-objdump -h -S  STM32TFG1-WIFI.elf  > "STM32TFG1-WIFI.list"
    text	   data	    bss	    dec	    hex	filename
-  40268	    124	   9924	  50316	   c48c	STM32TFG1-WIFI.elf
-Finished building: default.size.stdout
- 
-Finished building: STM32TFG1-WIFI.list
- 
-19:02:29 **** Incremental Build of configuration Debug for project STM32TFG1-WIFI ****
-make -j12 all 
-arm-none-eabi-gcc "../Core/Src/SerialTask.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L475xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/SerialTask.d" -MT"Core/Src/SerialTask.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/SerialTask.o"
-arm-none-eabi-gcc -o "STM32TFG1-WIFI.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\JoseCarlos\Programacion\STM32CubeIDE_Repositories\workspace_1.9.0\STM32TFG1-WIFI\STM32L475VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32TFG1-WIFI.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: STM32TFG1-WIFI.elf
- 
-arm-none-eabi-size   STM32TFG1-WIFI.elf 
-arm-none-eabi-objdump -h -S  STM32TFG1-WIFI.elf  > "STM32TFG1-WIFI.list"
-   text	   data	    bss	    dec	    hex	filename
-  40268	    124	   9924	  50316	   c48c	STM32TFG1-WIFI.elf
-Finished building: default.size.stdout
- 
-Finished building: STM32TFG1-WIFI.list
- 
-20:43:44 **** Incremental Build of configuration Debug for project STM32TFG1-WIFI ****
-make -j12 all 
-arm-none-eabi-gcc "../Core/Src/SerialTask.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L475xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/SerialTask.d" -MT"Core/Src/SerialTask.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/SerialTask.o"
-arm-none-eabi-gcc -o "STM32TFG1-WIFI.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\JoseCarlos\Programacion\STM32CubeIDE_Repositories\workspace_1.9.0\STM32TFG1-WIFI\STM32L475VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32TFG1-WIFI.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: STM32TFG1-WIFI.elf
- 
-arm-none-eabi-size   STM32TFG1-WIFI.elf 
-arm-none-eabi-objdump -h -S  STM32TFG1-WIFI.elf  > "STM32TFG1-WIFI.list"
-   text	   data	    bss	    dec	    hex	filename
-  40268	    124	   9924	  50316	   c48c	STM32TFG1-WIFI.elf
+  58224	    124	  14388	  72736	  11c20	STM32TFG1-WIFI.elf
 Finished building: default.size.stdout
  
 Finished building: STM32TFG1-WIFI.list

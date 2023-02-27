@@ -1,17 +1,38 @@
-20:43:44 **** Incremental Build of configuration Debug for project STM32TFG1-WIFI ****
+13:38:52 **** Incremental Build of configuration Debug for project STM32TFG1-WIFI ****
 make -j12 all 
-arm-none-eabi-gcc "../Core/Src/SerialTask.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L475xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/SerialTask.d" -MT"Core/Src/SerialTask.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/SerialTask.o"
+arm-none-eabi-gcc "../Core/Src/SerialTask.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L475xx -c -I../Core/Inc -I../LibWIFI/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/SerialTask.d" -MT"Core/Src/SerialTask.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/SerialTask.o"
+In file included from ../Core/Inc/SerialTask.h:17,
+                 from ../Core/Inc/HAL_Instructions.h:17,
+                 from ../Core/Inc/SerialTask.h:13,
+                 from ../Core/Src/SerialTask.c:1:
+../Core/Src/SerialTask.c: In function 'HAL_UART_TxCpltCallback':
+../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h:624:125: warning: passing argument 2 of 'xQueueGiveFromISR' makes pointer from integer without a cast [-Wint-conversion]
+  624 | #define xSemaphoreGiveFromISR( xSemaphore, pxHigherPriorityTaskWoken ) xQueueGiveFromISR( ( QueueHandle_t ) ( xSemaphore ), ( pxHigherPriorityTaskWoken ) )
+      |                                                                                                                             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                                                                                             |
+      |                                                                                                                             long int
+../Core/Src/SerialTask.c:102:2: note: in expansion of macro 'xSemaphoreGiveFromISR'
+  102 |  xSemaphoreGiveFromISR(xSemaphore, xHigherPriorityTaskWoken);
+      |  ^~~~~~~~~~~~~~~~~~~~~
+In file included from ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h:35,
+                 from ../Core/Inc/SerialTask.h:17,
+                 from ../Core/Inc/HAL_Instructions.h:17,
+                 from ../Core/Inc/SerialTask.h:13,
+                 from ../Core/Src/SerialTask.c:1:
+../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h:1296:72: note: expected 'BaseType_t * const' {aka 'long int * const'} but argument is of type 'long int'
+ 1296 | BaseType_t xQueueGiveFromISR( QueueHandle_t xQueue, BaseType_t * const pxHigherPriorityTaskWoken ) PRIVILEGED_FUNCTION;
+      |                                                     ~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~
 arm-none-eabi-gcc -o "STM32TFG1-WIFI.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\JoseCarlos\Programacion\STM32CubeIDE_Repositories\workspace_1.9.0\STM32TFG1-WIFI\STM32L475VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32TFG1-WIFI.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 Finished building target: STM32TFG1-WIFI.elf
  
 arm-none-eabi-size   STM32TFG1-WIFI.elf 
 arm-none-eabi-objdump -h -S  STM32TFG1-WIFI.elf  > "STM32TFG1-WIFI.list"
    text	   data	    bss	    dec	    hex	filename
-  40268	    124	   9924	  50316	   c48c	STM32TFG1-WIFI.elf
+  58224	    124	  14388	  72736	  11c20	STM32TFG1-WIFI.elf
 Finished building: default.size.stdout
  
 Finished building: STM32TFG1-WIFI.list
  
 
-20:43:45 Build Finished. 0 errors, 0 warnings. (took 1s.530ms)
+13:38:53 Build Finished. 0 errors, 1 warnings. (took 1s.268ms)
 

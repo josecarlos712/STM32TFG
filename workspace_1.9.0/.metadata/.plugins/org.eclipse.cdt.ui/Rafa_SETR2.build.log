@@ -1,0 +1,24 @@
+18:55:34 **** Incremental Build of configuration Debug for project Rafa_SETR2 ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/web_server.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DDEBUG -DSTM32L475xx -c -I../BSP -I../Components -I../Core/Inc -I../LibWIFI/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/web_server.d" -MT"Core/Src/web_server.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/web_server.o"
+../Core/Src/web_server.c: In function 'WebServerProcess':
+../Core/Src/web_server.c:181:22: warning: implicit declaration of function 'GetSensores' [-Wimplicit-function-declaration]
+  181 |         temp = (int) GetSensores(); //BSP_TSENSOR_ReadTemp();
+      |                      ^~~~~~~~~~~
+../Core/Src/web_server.c:200:14: warning: implicit declaration of function 'EncolarLED' [-Wimplicit-function-declaration]
+  200 |              EncolarLED(LedState);
+      |              ^~~~~~~~~~
+arm-none-eabi-gcc -o "Rafa_SETR2.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\josec_oyj1y1p\Downloads\Rafa_SETR2\STM32L475VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Rafa_SETR2.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Rafa_SETR2.elf
+ 
+arm-none-eabi-size   Rafa_SETR2.elf 
+arm-none-eabi-objdump -h -S  Rafa_SETR2.elf  > "Rafa_SETR2.list"
+   text	   data	    bss	    dec	    hex	filename
+  75828	    684	  14332	  90844	  162dc	Rafa_SETR2.elf
+Finished building: default.size.stdout
+ 
+Finished building: Rafa_SETR2.list
+ 
+
+18:55:36 Build Finished. 0 errors, 2 warnings. (took 2s.3ms)
+

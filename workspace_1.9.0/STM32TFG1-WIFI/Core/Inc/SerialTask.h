@@ -16,10 +16,12 @@
 #include "cmsis_os2.h"
 #include "semphr.h"
 
-extern UART_HandleTypeDef huart4;
+extern UART_HandleTypeDef huart4, huart1;
 extern osSemaphoreId_t xSemaphoreSerialHandle;
+extern SemaphoreHandle_t xSemaphore;
 extern osMessageQueueId_t instructionQueueHandle;
 
+void TareaWebServer(void *pArg);
 void CreateSerialTask();
 void CreateSerialObjects(void);
 void serialRxTask(void * parg);
