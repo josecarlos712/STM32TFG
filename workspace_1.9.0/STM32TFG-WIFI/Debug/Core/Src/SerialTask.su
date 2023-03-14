@@ -1,0 +1,10 @@
+../Core/Src/SerialTask.c:3:1:__io_putchar	16	static
+../Core/Src/SerialTask.c:44:6:serialRxTask	24	static
+../Core/Src/SerialTask.c:67:6:serialTxTask	24	static
+../Core/Src/SerialTask.c:82:6:TareaWebServer	16	static
+../Core/Src/SerialTask.c:87:6:CreateSerialObjects	8	static
+../Core/Src/SerialTask.c:95:6:PrintTask	16	static
+../Core/Src/SerialTask.c:102:6:CreateSerialTask	16	static
+../Core/Src/SerialTask.c:109:6:HAL_UART_TxCpltCallback	16	static,ignoring_inline_asm
+../Core/Src/SerialTask.c:129:6:HAL_UART_RxCpltCallback	16	static,ignoring_inline_asm
+../Core/Src/SerialTask.c:135:5:__io_getchar	16	static

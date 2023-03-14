@@ -1,7 +1,7 @@
 LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/arch=x86_64
 LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/name=Local
 LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/os=win32
-configDescList=org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:STM32TFG1-WIFI
+configDescList=org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:STM32TFG1-WIFI,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:STM32TFG1-WIFI (1)
 eclipse.preferences.version=1
 org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Rafa_SETR2\ Debug/activeLaunchMode=debug
 org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Rafa_SETR2\ Debug/activeLaunchTarget=null\:---

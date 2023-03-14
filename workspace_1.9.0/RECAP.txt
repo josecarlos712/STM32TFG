@@ -1,0 +1,1 @@
+Probando que dos tareas a la vez impriman en el puerto serie. Quizas necesita un semaforo para administrar el recurso compartido.
