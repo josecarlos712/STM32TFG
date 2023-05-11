@@ -1,1 +1,7 @@
-Probando que dos tareas a la vez impriman en el puerto serie. Quizas necesita un semaforo para administrar el recurso compartido.
+110523
+
+Hay que mirar el tema de semaforos ya que no se transmite la palabra completa, se mezcla con la de la otra tarea. -> No van a imprimir dos tareas al mismo tiempo en el bus UART por lo que no tiene sentido darle mas vueltas. Solo tiene que imprimir por el bus la tarea que envia las instrucciones.
+
+CHECKPOINT
+
+Se ha limpiado y organizado parte del codigo con ayuda de ChatGPT. Hago checkpoint antes de meterle mano al tema de peticiones GET.

@@ -1,8 +1,8 @@
-../Core/Src/web_server.c:53:12:wifi_start	16	static
-../Core/Src/web_server.c:86:5:wifi_connect	8	static
-../Core/Src/web_server.c:116:5:wifi_server	32	static
-../Core/Src/web_server.c:168:13:WebServerProcess	24	static
-../Core/Src/web_server.c:248:22:SendWebPage	96	static
-../Core/Src/web_server.c:310:6:EXTI1_IRQHandler	8	static
-../Core/Src/web_server.c:321:6:HAL_GPIO_EXTI_Callback	16	static
-../Core/Src/web_server.c:344:6:SPI3_IRQHandler	8	static
+../Core/Src/web_server.c:46:12:wifi_start	16	static
+../Core/Src/web_server.c:70:5:wifi_connect	8	static
+../Core/Src/web_server.c:93:5:wifi_server	32	static
+../Core/Src/web_server.c:139:13:WebServerProcess	24	static
+../Core/Src/web_server.c:200:22:SendWebPage	96	static
+../Core/Src/web_server.c:265:6:EXTI1_IRQHandler	8	static
+../Core/Src/web_server.c:275:6:HAL_GPIO_EXTI_Callback	16	static
+../Core/Src/web_server.c:294:6:SPI3_IRQHandler	8	static

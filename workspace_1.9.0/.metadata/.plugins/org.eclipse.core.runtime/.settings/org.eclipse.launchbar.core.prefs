@@ -7,5 +7,7 @@ org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Rafa_SETR2\ Debug/activeLaunchM
 org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Rafa_SETR2\ Debug/activeLaunchTarget=null\:---
 org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:STM32TFG\ Debug/activeLaunchMode=run
 org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:STM32TFG\ Debug/activeLaunchTarget=null\:---
+org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:STM32TFG1-WIFI\ (1)/activeLaunchMode=run
+org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:STM32TFG1-WIFI\ (1)/activeLaunchTarget=null\:---
 org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:STM32TFG1-WIFI/activeLaunchMode=run
 org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:STM32TFG1-WIFI/activeLaunchTarget=null\:---

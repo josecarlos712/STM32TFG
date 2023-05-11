@@ -222,8 +222,11 @@ void Error_Handler(void);
 #define ISM43362_SPI3_CSN_GPIO_Port GPIOE
 #define ISM43362_DRDY_EXTI1_Pin GPIO_PIN_1
 #define ISM43362_DRDY_EXTI1_GPIO_Port GPIOE
+
 /* USER CODE BEGIN Private defines */
-void CreateSerialTask();
+//void CreateSerialTask();
+void PrintTask(void *parg);
+void WebServerTask(void *pArg);
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus
