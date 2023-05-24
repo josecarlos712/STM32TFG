@@ -32,8 +32,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-osSemaphoreId_t xSemaphoreSerialHandle;
-osMessageQueueId_t instructionQueueHandle;
+
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/

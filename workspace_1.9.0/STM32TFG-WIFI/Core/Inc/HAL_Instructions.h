@@ -15,6 +15,7 @@
 
 #include "generalTypes.h"
 #include "SerialTask.h"
+#include <stdarg.h>
 
 /*
  * Envia una instruccion por el puerto serie dado:
@@ -30,5 +31,7 @@ void S_SendInstruction(uint8_t instCode, uint8_t time);
  * 	MovementInstruction_t *pMov - Struct de instruccion de movimiento
  */
 void S_SendInstructionStruct(MovementInstruction_t *pMov);
+
+void S_PrintOnSerial(const char*__restrict, ...) _ATTRIBUTE ((__format__ (__S_PrintOnSerial__, 1, 2)));
 
 #endif /* INC_HAL_INSTRUCTIONS_H_ */

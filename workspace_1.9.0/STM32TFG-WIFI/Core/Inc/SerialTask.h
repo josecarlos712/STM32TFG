@@ -28,6 +28,7 @@ void serialRxTask(void *parg);
 void serialTxTask(void *parg);
 void PrintTask(void *parg);
 int wifi_server(void);
+int RequestJSONProcess();
 void WebServerTask(void *pArg);
 void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart);
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart);

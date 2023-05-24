@@ -22,7 +22,7 @@ void S_SendInstruction(uint8_t instCode, uint8_t time) {
 	while (xSemaphoreTake(xSemaphoreSerialHandle, portMAX_DELAY) != pdTRUE)
 		;
 	//Envio el struct por el puerto serie
-	printf("%s\n", s_mov);
+	printf("%s\r\n", s_mov);
 	//Devuelvo el control del puerto serie
 	xSemaphoreGive(xSemaphoreSerialHandle);
 	//Libero la memoria reservada por malloc
@@ -37,7 +37,20 @@ void S_SendInstructionStruct(MovementInstruction_t *pMov) {
 	while (xSemaphoreTake(xSemaphoreSerialHandle, portMAX_DELAY) != pdTRUE)
 		;
 	//Envio el struct por el puerto serie
-	printf("%s\n", s_mov);
+	printf("%s\r\n", s_mov);
 	//Devuelvo el control del puerto serie
 	xSemaphoreGive(xSemaphoreSerialHandle);
+}
+
+void S_PrintOnSerial(const char *format, ...) {
+	while (xSemaphoreTake(xSemaphoreSerialHandle, portMAX_DELAY) != pdTRUE)
+		;
+	va_list args;
+	va_start(args, format);
+	printf(format, args);
+	va_end(args);
+	// Give the semaphore to indicate that the transmission has finished
+	xSemaphoreGiveFromISR(xSemaphoreSerialHandle, pdFALSE);
+	// Yield to higher priority task if necessary
+	portYIELD_FROM_ISR(pdFALSE);
 }

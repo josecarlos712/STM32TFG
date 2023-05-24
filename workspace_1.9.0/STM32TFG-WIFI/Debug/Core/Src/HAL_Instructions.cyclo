@@ -1,2 +1,3 @@
 HAL_Instructions.c:14:6:S_SendInstruction	2
 HAL_Instructions.c:32:6:S_SendInstructionStruct	2
+HAL_Instructions.c:45:6:S_PrintOnSerial	2

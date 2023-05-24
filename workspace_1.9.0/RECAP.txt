@@ -5,3 +5,9 @@ Hay que mirar el tema de semaforos ya que no se transmite la palabra completa, s
 CHECKPOINT
 
 Se ha limpiado y organizado parte del codigo con ayuda de ChatGPT. Hago checkpoint antes de meterle mano al tema de peticiones GET.
+
+250523
+
+Esto ya envia una peticion JSON a un servidor abierto en local con python. He tenido que forzar a que agregue al final de la respuesta de la api un "\r\nOK\r\n> " para poder detectarlo antes de hacer otra peticion ya que si no daba error al no haber mas datos que recibir.
+
+Lo que queda va en el TO-DO

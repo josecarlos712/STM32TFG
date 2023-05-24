@@ -30,12 +30,16 @@ void serialRxTask(void *parg) {
 		// Send the struct to the queue
 		xQueueSend(instructionQueueHandle, pMov, 1);
 		// Delay for 1 second
-		vTaskDelay(1000);
+		vTaskDelay(10);
 		// Free the memory of the MovementInstruction_t struct
 		free(pMov);
 		// Update the instruction to be sent
 		ins = (ins + 1) % I_NUM_INSTRUCTIONS;
 		i++;
+	}
+
+	while (1) {
+		vTaskDelay(1000);
 	}
 }
 
@@ -52,7 +56,14 @@ void serialTxTask(void *parg) {
 }
 
 void WebServerTask(void *pArg) {
-	wifi_server();
+
+	S_PrintOnSerial("ServidorWeb\r\n");
+
+	if(RequestJSONProcess() != 0)
+		S_PrintOnSerial("Se ha detenido el proceso de peticiones");
+
+	while(1)
+		vTaskDelay(1000);
 }
 
 void CreateSerialObjects() {
@@ -66,11 +77,12 @@ void CreateSerialTask() {
 	xTaskCreate(serialRxTask, "serialRxTask", 256, NULL, 1, NULL);
 }
 
-void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart) {
-	static signed long xHigherPriorityTaskWoken = pdFALSE;
+/*void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart) {
+ static signed long xHigherPriorityTaskWoken = pdFALSE;
 
-	// Give the semaphore to indicate that the transmission has finished
-	xSemaphoreGiveFromISR(xSemaphoreSerialHandle, xHigherPriorityTaskWoken);
-	// Yield to higher priority task if necessary
-	portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
-}
+ // Give the semaphore to indicate that the transmission has finished
+ xSemaphoreGiveFromISR(xSemaphoreSerialHandle, xHigherPriorityTaskWoken);
+ // Yield to higher priority task if necessary
+ portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
+ }
+ */
