@@ -32,6 +32,6 @@ void S_SendInstruction(uint8_t instCode, uint8_t time);
  */
 void S_SendInstructionStruct(MovementInstruction_t *pMov);
 
-void S_PrintOnSerial(const char*__restrict, ...) _ATTRIBUTE ((__format__ (__S_PrintOnSerial__, 1, 2)));
+void S_PrintOnSerial(const char*__restrict, ...);
 
 #endif /* INC_HAL_INSTRUCTIONS_H_ */
