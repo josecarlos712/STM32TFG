@@ -1,12 +1,13 @@
 from flask import Flask, jsonify
 import json
+import random
 
 app = Flask(__name__)
 
 @app.route('/mi-api', methods=['GET'])
 def get_data():
     # Aquí generas tu respuesta en formato JSON
-    response = {'key': 'value'}
+    response = {'key': random.randint(1, 10)}
 
     # Convertir la respuesta en formato JSON a una cadena de texto
     response_str = json.dumps(response)

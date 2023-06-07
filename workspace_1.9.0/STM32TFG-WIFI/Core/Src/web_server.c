@@ -18,7 +18,7 @@ extern float temperature;
 #define SSID     "ONSICOM_CRESPO"
 #define PASSWORD "1971J1998JC2002J2009A"
 #define PORT           80
-#define MAX_CHUNK_SIZE 64
+#define MAX_CHUNK_SIZE 128
 
 #define TERMINAL_USE
 
@@ -41,7 +41,7 @@ int wifi_server(void);
 //static int wifi_start(void);
 //static int wifi_connect(void);
 //static bool WebServerProcess(void);
-bool RequestJSON();
+bool RequestJSON(uint8_t *jsonbody);
 int RequestJSONProcess();
 
 int RequestJSONProcess() {
@@ -62,20 +62,25 @@ int RequestJSONProcess() {
 		uint8_t serverIPAddr[4] = { 192, 168, 18, 3 };
 		uint32_t clientSocket = 0;
 
-		if (WIFI_OpenClientConnection(clientSocket, WIFI_TCP_PROTOCOL, "",
-				serverIPAddr, serverPort, 0) == WIFI_STATUS_OK) {
-			S_PrintOnSerial("-client\r\n");
-			//Infinite bucle of API requests
-			do {
-				StopServer = RequestJSON();
-				vTaskDelay(2000);
-			} while (StopServer == false);
-		} else {
-			S_PrintOnSerial("-fail client\r\n");
+		for (int i = 0; i < 4; i++) {
+			if (WIFI_OpenClientConnection(clientSocket, WIFI_TCP_PROTOCOL, "",
+					serverIPAddr, serverPort, 0) == WIFI_STATUS_OK) {
+				//S_PrintOnSerial("-client\r\n");
+				//Infinite bucle of API requests
+				uint8_t *response = malloc(sizeof(uint8_t) * MAX_CHUNK_SIZE);
+
+				StopServer = RequestJSON(response);
+				printf("%s\r\n", (char*) response);
+
+				free(response);
+				//Disconnect from server
+				WIFI_CloseClientConnection(clientSocket);
+			} else {
+				S_PrintOnSerial("-fail client\r\n");
+			}
+
+			//S_PrintOnSerial("-clossing client");
 		}
-		//Disconnect from server
-		S_PrintOnSerial("-clossing client");
-		WIFI_CloseClientConnection(clientSocket);
 		// Disconnect from WiFi
 		WIFI_Disconnect();
 		S_PrintOnSerial("-clossing wifi");
@@ -86,7 +91,7 @@ int RequestJSONProcess() {
 	return 1;
 }
 
-bool RequestJSON() {
+bool RequestJSON(uint8_t *jsonbody) {
 	uint32_t clientSocket = 0;
 	//Send an HTTP GET request
 	const char *getRequest =
@@ -125,25 +130,26 @@ bool RequestJSON() {
 		char *endOfHeaders = strstr((char*) response, "\r\n\r\n");
 		if (endOfHeaders) {
 			// Print the JSON body
-			printf("Received JSON body:\n");
+			//printf("Received JSON body:\n");
 
 			// Print the remaining JSON body
-			printf("%s", endOfHeaders + 4);
+			//printf("%s", endOfHeaders + 4);
 
 			// Receive and print the remaining JSON body
 			while (1) {
-				uint8_t chunk[128]; // Adjust the chunk size as per your requirements
+				uint8_t chunk[MAX_CHUNK_SIZE]; // Adjust the chunk size as per your requirements
 				uint16_t receivedChunkLength = 0;
 				uint32_t receiveTimeout = 1000; // Adjust the receive timeout value as per your requirements
 
 				// Receive a chunk of data
-				if (WIFI_ReceiveData(clientSocket, chunk, sizeof(chunk) - 1,
+				if (WIFI_ReceiveData(clientSocket, chunk, MAX_CHUNK_SIZE - 1,
 						&receivedChunkLength, receiveTimeout)
 						== WIFI_STATUS_OK) {
 					chunk[receivedChunkLength] = '\0'; // Null-terminate the chunk
 
 					// Print the received chunk
-					printf("%s", chunk);
+					//printf("%s\r\n", chunk);
+					memcpy(jsonbody, chunk, receivedChunkLength + 1);
 
 					// Check if the chunk is the end of the response
 					if (receivedChunkLength < sizeof(chunk) - 1) {
