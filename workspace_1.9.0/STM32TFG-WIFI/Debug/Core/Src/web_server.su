@@ -1,5 +1,6 @@
-../Core/Src/web_server.c:47:5:RequestJSONProcess	88	static
-../Core/Src/web_server.c:94:6:RequestJSON	712	static
-../Core/Src/web_server.c:234:6:EXTI1_IRQHandler	8	static
-../Core/Src/web_server.c:244:6:HAL_GPIO_EXTI_Callback	16	static
-../Core/Src/web_server.c:263:6:SPI3_IRQHandler	8	static
+../Core/Src/web_server.c:48:5:RequestJSONProcess	376	static
+../Core/Src/web_server.c:128:6:formarCadena	32	static
+../Core/Src/web_server.c:142:6:RequestJSON	840	static
+../Core/Src/web_server.c:252:6:EXTI1_IRQHandler	8	static
+../Core/Src/web_server.c:262:6:HAL_GPIO_EXTI_Callback	16	static
+../Core/Src/web_server.c:281:6:SPI3_IRQHandler	8	static

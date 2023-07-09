@@ -5,7 +5,7 @@
 #include "globalConst.hpp"
 
 //Constantes
-int paso = 0, puntPaso = 0;
+int paso = 0;
 int pasos[MAX_NUM_INST];
 float timepasos[MAX_NUM_INST];
 
@@ -27,18 +27,16 @@ void setup()
   //Iniciacion de variables
   initCont = micros(); //Bandera de tiempo para el contador del escaner
   cleanQueue();
+  //initTest();
 }
 
 void loop()
 {
   if (digitalRead(50) == LOW) {
-    if (primera) {
-      primera = false;
-    }
-    loadInstructions();
-    //scanner();
+    scanner();
     continueMov();
   }
+  //loadInstructions();
 }
 
 void scanner() {
@@ -58,30 +56,30 @@ void scanner() {
 
 
 void checkFrontWall() {
-  // Clears the trig condition
+  // Borra la condición de disparo
   digitalWrite(trig, LOW);
   delayMicroseconds(2);
-  // Sets the trig HIGH (ACTIVE) for 10 microseconds
+  // Establece trig en ALTO (ACTIVO) durante 10 microsegundos
   digitalWrite(trig, HIGH);
   delayMicroseconds(10);
   digitalWrite(trig, LOW);
-  // Reads the echo, returns the sound wave travel time in microseconds
+  // Lee el eco, devuelve el tiempo de viaje de la onda de sonido en microsegundos
   duration = pulseIn(echo, HIGH);
-  // Calculating the distance
-  distance = duration * 0.034 / 2; // Speed of sound wave divided by 2 (go and back)
-  if (distance < 200) { //Proteccion para valores anormales
-    if (distance < 10 && !cerca) { //Si la distancia es menor a 10cm el vehiculo se para
+  // Calcula la distancia
+  distance = duration * 0.034 / 2; // Velocidad de la onda de sonido dividida por 2 (ida y vuelta)
+  if (distance < 200) { // Protección para valores anormales
+    if (distance < 10 && !cerca) { // Si la distancia es menor a 10 cm, el vehículo se detiene
       cerca = true;
       Serial.println("PARA");
       para();
-    } else if (distance > 30 && cerca) { //Si la distancia aumenta a 30 el vehiculo continua el trayecto
+    } else if (distance > 30 && cerca) { // Si la distancia aumenta a 30 cm, el vehículo continúa su trayecto
       if (initStop == 0) {
         initStop = micros();
       }
       acumStop = micros() - initStop;
       cerca = false;
-      initmicro = micros() - microCrono; //Una vez se reanuda el trayecto se establece un nuevo inicio en base a cuanto llevaba ya ejecutado
-      //Serial.println("SIGUE");
+      initmicro = micros() - microCrono; // Una vez se reanuda el trayecto, se establece un nuevo inicio basado en el tiempo ya ejecutado
+      // Serial.println("SIGUE");
     }
   }
 }
@@ -92,7 +90,8 @@ void doMove(const int est, const float dur) {
       estado = PARADO;
       microCrono = 0;
       goalCrono = dur * 1000000;
-      Serial.println("Parado");
+      Serial.print("Parado ");
+      Serial.println(dur);
       if (enableMovement) {
         para();
       }
@@ -101,7 +100,8 @@ void doMove(const int est, const float dur) {
       estado = ADELANTE;
       microCrono = 0;
       goalCrono = dur * 1000000;
-      Serial.println("Adelante");
+      Serial.print("Adelante ");
+      Serial.println(dur);
       if (enableMovement) {
         adelante();
       }
@@ -110,7 +110,8 @@ void doMove(const int est, const float dur) {
       estado = ATRAS; //Se carga el estado
       microCrono = 0; //Se reinicia el cronometro de estado
       goalCrono = dur * 1000000;
-      Serial.println("Atras");
+      Serial.print("Atras ");
+      Serial.println(dur);
       if (enableMovement) {
         atras();
       }
@@ -119,7 +120,8 @@ void doMove(const int est, const float dur) {
       estado = DERECHA;
       microCrono = 0;
       goalCrono = dur * 1000000;
-      Serial.println("Derecha");
+      Serial.print("Derecha ");
+      Serial.println(dur);
       if (enableMovement) {
         girarDer();
       }
@@ -128,7 +130,8 @@ void doMove(const int est, const float dur) {
       estado = IZQUIERDA;
       microCrono = 0;
       goalCrono = dur * 1000000;
-      Serial.println("Izquierda");
+      Serial.print("Izquierda ");
+      Serial.println(dur);
       if (enableMovement) {
         girarIzq();
       }
@@ -137,12 +140,14 @@ void doMove(const int est, const float dur) {
       estado = NOPE;
       microCrono = 0;
       goalCrono = dur * 1000000;
-      Serial.println("NOPE");
+      Serial.print("NOPE ");
+      Serial.println(dur);
       break;
     default:
       microCrono = 0;
       goalCrono = 1;
-      Serial.println("Parado");
+      Serial.print("Parado ");
+      Serial.println(dur);
       para();
       break;
   }

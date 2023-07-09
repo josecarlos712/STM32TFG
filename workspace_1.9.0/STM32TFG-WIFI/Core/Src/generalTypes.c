@@ -7,15 +7,28 @@
 
 #include "generalTypes.h"
 
+
+// Convierte una estructura de instrucción de movimiento en una cadena de texto
+// Parámetros:
+// - pMovIns: puntero a la estructura de instrucción de movimiento
+// - buf: puntero a un puntero de caracteres donde se almacenará la cadena resultante
 void I_MovementInstruction_toString(MovementInstruction_t *pMovIns, char **buf) {
 
-	char *s = (char*) malloc(NUM_CHARS_PER_INSTRUCTION);
+	char s[NUM_CHARS_PER_INSTRUCTION];
 
 	sprintf(s, "%d %d", pMovIns->instruction, pMovIns->duration);
 
 	*buf = s;
 }
 
+// Crea una estructura de instrucción de movimiento con los parámetros proporcionados
+// Parámetros:
+// - instCode: código de instrucción
+// - time: tiempo de ejecución
+// - pMovOut: puntero a la estructura de instrucción de movimiento de salida
+// Devuelve:
+// - 1 si los parámetros son válidos y se creó la estructura de instrucción correctamente
+// - 0 si los parámetros son inválidos y se asigna la instrucción NOPE por defecto a la estructura de salida
 uint8_t I_CreateInstructionStruct(uint8_t instCode, uint8_t time,
 		MovementInstruction_t *pMovOut) {
 	// Comprueba que todos los parametros sean correctos

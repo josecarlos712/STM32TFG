@@ -1,2 +1,3 @@
-#define MAX_NUM_INST 10
+#define MAX_NUM_INST 50
+#define MAX_NUM_INST_LOAD 20
 #define NUM_SCANS_PER_SECOND 3

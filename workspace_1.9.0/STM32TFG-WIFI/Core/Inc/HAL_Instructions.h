@@ -16,6 +16,12 @@
 #include "generalTypes.h"
 #include "SerialTask.h"
 #include <stdarg.h>
+#include <stdint.h>
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+#define MAX_NUM_INSTRUCTIONS 100
 
 /*
  * Envia una instruccion por el puerto serie dado:
@@ -33,5 +39,10 @@ void S_SendInstruction(uint8_t instCode, uint8_t time);
 void S_SendInstructionStruct(MovementInstruction_t *pMov);
 
 void S_PrintOnSerial(const char*__restrict, ...);
+
+uint8_t I_JsonToInstructions(const char *json, uint8_t *iJson, uint8_t *iSize,
+		uint8_t *dJson, uint8_t *dSize);
+const char* findJsonValue(const char *json, const char *key);
+void parseJsonArray(const char *jsonArray, uint8_t *array, size_t size);
 
 #endif /* INC_HAL_INSTRUCTIONS_H_ */

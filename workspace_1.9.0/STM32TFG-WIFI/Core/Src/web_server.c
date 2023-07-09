@@ -18,7 +18,8 @@ extern float temperature;
 #define SSID     "ONSICOM_CRESPO"
 #define PASSWORD "1971J1998JC2002J2009A"
 #define PORT           80
-#define MAX_CHUNK_SIZE 128
+#define MAX_CHUNK_SIZE 256
+#define MAX_REQUEST_SIZE 128
 
 #define TERMINAL_USE
 
@@ -41,7 +42,7 @@ int wifi_server(void);
 //static int wifi_start(void);
 //static int wifi_connect(void);
 //static bool WebServerProcess(void);
-bool RequestJSON(uint8_t *jsonbody);
+bool RequestJSON(uint8_t *jsonbody, char *request);
 int RequestJSONProcess();
 
 int RequestJSONProcess() {
@@ -62,21 +63,51 @@ int RequestJSONProcess() {
 		uint8_t serverIPAddr[4] = { 192, 168, 18, 3 };
 		uint32_t clientSocket = 0;
 
-		for (int i = 0; i < 4; i++) {
-			if (WIFI_OpenClientConnection(clientSocket, WIFI_TCP_PROTOCOL, "",
-					serverIPAddr, serverPort, 0) == WIFI_STATUS_OK) {
-				//S_PrintOnSerial("-client\r\n");
-				//Infinite bucle of API requests
-				uint8_t *response = malloc(sizeof(uint8_t) * MAX_CHUNK_SIZE);
+		while (!StopServer) {
+			MovementInstruction_t *pMov;
+			//Espera a un mensaje proveniente de la tarea serialRxTask para hacer una peticion
+			osStatus_t status = osMessageQueueGet(instructionQueueHandle, &pMov,
+			NULL,
+			osWaitForever);
+			// Receive the instruction from the queue
+			if (status == osOK && pMov != NULL) {
+				if (WIFI_OpenClientConnection(clientSocket, WIFI_TCP_PROTOCOL,
+						"", serverIPAddr, serverPort, 0) == WIFI_STATUS_OK) {
+					S_PrintOnSerial("-client\r\n");
+					uint8_t response[MAX_CHUNK_SIZE];
+					//Request
+					char *request1 =
+							"GET /mi-api HTTP/1.1\r\nHost: 192.168.18.3\r\n\r\n";
+					StopServer = RequestJSON(response, request1);
 
-				StopServer = RequestJSON(response);
-				printf("%s\r\n", (char*) response);
+					//Transformar el JSON en instrucciones
+					uint8_t *instructionJson = malloc(
+							sizeof(uint8_t) * MAX_NUM_INSTRUCTIONS);
+					uint8_t *durationJson = malloc(
+							sizeof(uint8_t) * MAX_NUM_INSTRUCTIONS);
+					uint8_t *iSize = malloc(sizeof(uint8_t));
+					uint8_t *dSize = malloc(sizeof(uint8_t));
 
-				free(response);
-				//Disconnect from server
-				WIFI_CloseClientConnection(clientSocket);
-			} else {
-				S_PrintOnSerial("-fail client\r\n");
+					I_JsonToInstructions((const char*) response,
+							instructionJson, iSize, durationJson, dSize);
+
+					char *serialJson = malloc(sizeof(char) * 200);
+
+					for (size_t i = 0; i < (*iSize); ++i) {
+						sprintf(serialJson, "%d %d\n", instructionJson[i],
+								durationJson[i]);
+						serialJson += strlen(serialJson); // Mueve el puntero al final de la cadena agregada
+					}
+
+					printf("%s", serialJson);
+
+					//Disconnect from server
+					WIFI_CloseClientConnection(clientSocket);
+				} else {
+					S_PrintOnSerial("-fail client\r\n");
+
+				}
+				free(pMov);
 			}
 
 			//S_PrintOnSerial("-clossing client");
@@ -88,16 +119,21 @@ int RequestJSONProcess() {
 		S_PrintOnSerial("-fail host\r\n");
 	}
 
-	return 1;
+	return (int) StopServer;
 }
 
-bool RequestJSON(uint8_t *jsonbody) {
+// Realiza una solicitud HTTP GET para obtener un JSON de un servidor remoto
+// Parámetros:
+// - jsonbody: puntero al array de bytes donde se almacenará el JSON recibido
+// - request: cadena que representa la solicitud HTTP GET
+// Retorna:
+// - true si la solicitud se completó con éxito, false si ocurrió un error
+bool RequestJSON(uint8_t *jsonbody, char *request) {
 	uint32_t clientSocket = 0;
 	//Send an HTTP GET request
-	const char *getRequest =
-			"GET /mi-api HTTP/1.1\r\nHost: 192.168.18.3\r\n\r\n";
+	//const char *getRequest = "GET /mi-api HTTP/1.1\r\nHost: 192.168.18.3\r\n\r\n";
 	uint8_t response[512]; // Adjust the response buffer size as per your requirements
-	uint16_t getRequestLength = strlen(getRequest);
+	uint16_t getRequestLength = strlen(request);
 
 	// Send data in smaller chunks
 	uint16_t sentDataLength = 0;
@@ -107,9 +143,9 @@ bool RequestJSON(uint8_t *jsonbody) {
 				(remainingDataLength > MAX_CHUNK_SIZE) ?
 				MAX_CHUNK_SIZE :
 															remainingDataLength;
-		if (WIFI_SendData(clientSocket,
-				(uint8_t*) (getRequest + sentDataLength), chunkSize,
-				&sentDataLength, WIFI_WRITE_TIMEOUT) == WIFI_STATUS_OK) {
+		if (WIFI_SendData(clientSocket, (uint8_t*) (request + sentDataLength),
+				chunkSize, &sentDataLength, WIFI_WRITE_TIMEOUT)
+				== WIFI_STATUS_OK) {
 			remainingDataLength -= sentDataLength;
 		} else {
 			printf("Failed to send the request.\n");
@@ -147,9 +183,22 @@ bool RequestJSON(uint8_t *jsonbody) {
 						== WIFI_STATUS_OK) {
 					chunk[receivedChunkLength] = '\0'; // Null-terminate the chunk
 
-					// Print the received chunk
-					//printf("%s\r\n", chunk);
-					memcpy(jsonbody, chunk, receivedChunkLength + 1);
+					// Buscar la posición de la cadena "\r\n\OK\r\n\>"
+					char *endMarker = strstr((char*) chunk, "\r\nOK\r\n>");
+
+					if (endMarker != NULL) {
+						// Calcular la longitud del JSON
+						size_t jsonLength = endMarker - (char*) chunk;
+
+						// Copiar el JSON a una nueva ubicación en la memoria
+						memmove(chunk, chunk, jsonLength);
+
+						// Agregar el carácter de fin de línea '\0' al final del JSON
+						chunk[jsonLength] = '\0';
+
+						//Devolver el contenido del json
+						memcpy(jsonbody, chunk, jsonLength + 1);
+					}
 
 					// Check if the chunk is the end of the response
 					if (receivedChunkLength < sizeof(chunk) - 1) {
@@ -170,48 +219,6 @@ bool RequestJSON(uint8_t *jsonbody) {
 	return 0;
 }
 
-/**
- * @brief  Send HTML page
- * @param  None
- * @retval None
- */
-/*
- static WIFI_Status_t SendWebPage(uint8_t ledIsOn, uint8_t temperature) {
- uint16_t SentDataLength;
- WIFI_Status_t ret;
-
- // construct web page content /
- char http[512];  // Variable para almacenar la página web
- uint8_t temp[50]; // Variable para almacenar la temperatura convertida a cadena
-
- // Inicializar la variable http con la cabecera de la página web
- strcpy((char*) http,
- (char*) "HTTP/1.0 200 OK\r\nContent-Type: text/html\r\nPragma: no-cache\r\n\r\n");
-
- // Concatenar el inicio del contenido de la página web
- strcat((char*) http,
- (char*) "<html><body><title>STM32cubeide Web Server</title><h2>InventekSys: Web Server STM32</h2><br /><hr><p><form method=\"POST\"><strong>Temp: <input type=\"text\" value=\"");
-
- // Convertir la temperatura a una cadena de caracteres y concatenarla al contenido de la página web
- sprintf((char*) temp, "%d", temperature);
- strcat((char*) http, (char*) temp);
-
- // Concatenar el resto del contenido de la página web
- strcat((char*) http,
- (char*) "\"><sup>O</sup>C <input type=\"radio\" name=\"radio\" value=\"4\" checked>apagado<br><input type=\"radio\" name=\"radio\" value=\"2\">encendido</strong><p><input type=\"submit\"></form></span></p></body></html>");
-
- // Enviar los datos de la página web a través de la conexión Wi-Fi
- ret = WIFI_SendData(0, (uint8_t*) http, strlen((char*) http),
- &SentDataLength, WIFI_WRITE_TIMEOUT);
-
- // Comprobar si se enviaron todos los datos correctamente
- if ((ret == WIFI_STATUS_OK) && (SentDataLength != strlen((char*) http))) {
- ret = WIFI_STATUS_ERROR;
- }
-
- return ret;
- }
- */
 //*************************************************************************//
 extern SPI_HandleTypeDef hspi3;
 
@@ -264,155 +271,3 @@ void SPI3_IRQHandler(void) {
 	HAL_SPI_IRQHandler(&hspi);
 	portYIELD_FROM_ISR(pdFALSE);
 }
-
-/*
- static int wifi_start(void) {
- uint8_t MAC_Addr[6];
-
- /Initialize and use WIFI module /
- if (WIFI_Init() == WIFI_STATUS_OK) {
- //LOG(("ES-WIFI Initialized.\n\r"));
- if (WIFI_GetMAC_Address(MAC_Addr) == WIFI_STATUS_OK) {
- LOG(("> es-wifi module MAC Address : %X:%X:%X:%X:%X:%X\n\r",
- MAC_Addr[0],
- MAC_Addr[1],
- MAC_Addr[2],
- MAC_Addr[3],
- MAC_Addr[4],
- MAC_Addr[5]));/
- } else {
- //LOG(("> ERROR : CANNOT get MAC address\n\r"));
- return -1;
- }
- } else {
- return -1;
- }
- return 0;
- }
-
- int wifi_connect(void) {
-
- wifi_start();
-
- //LOG(("\nConnecting to %s , %s\n\r",SSID,PASSWORD));
- if (WIFI_Connect(SSID, PASSWORD, WIFI_ECN_WPA2_PSK) == WIFI_STATUS_OK) {
- if (WIFI_GetIP_Address(IP_Addr) == WIFI_STATUS_OK) {
- /LOG(("> es-wifi module connected: got IP Address : %d.%d.%d.%d\n\r",
- IP_Addr[0],
- IP_Addr[1],
- IP_Addr[2],
- IP_Addr[3]));/
- } else {
- //LOG((" ERROR : es-wifi module CANNOT get IP address\n\r"));
- return -1;
- }
- } else {
- //LOG(("ERROR : es-wifi module NOT connected\n\r"));
- return -1;
- }
- return 0;
- }
-
- int wifi_server(void) {
- bool StopServer = false;
-
- //LOG(("\nRunning HTML Server test\n\r"));
- if (wifi_connect() != 0)
- return -1;
-
- if (WIFI_STATUS_OK
- != WIFI_StartServer(SOCKET, WIFI_TCP_PROTOCOL, 1, "", PORT)) {
- //LOG(("ERROR: Cannot start server.\n\r"));
- //LOG(("\n\r"));
- }
-
- //LOG(("Server is running and waiting for an HTTP  Client connection to %d.%d.%d.%d\n\r",IP_Addr[0],IP_Addr[1],IP_Addr[2],IP_Addr[3]));
-
- do {
- uint8_t RemoteIP[4];
- uint16_t RemotePort;
-
- while (WIFI_STATUS_OK
- != WIFI_WaitServerConnection(SOCKET, 100, RemoteIP, &RemotePort)) {
- //LOG(("Waiting connection to  %d.%d.%d.%d\n\r",IP_Addr[0],IP_Addr[1],IP_Addr[2],IP_Addr[3]));
- //LOG(("\rIDLE\n"));
- vTaskDelay(10);
- }
-
- //LOG(("Client connected %d.%d.%d.%d:%d\n\r",RemoteIP[0],RemoteIP[1],RemoteIP[2],RemoteIP[3],RemotePort));
-
- StopServer = RequestJSON();
- vTaskDelay(2000);
-
- if (WIFI_CloseServerConnection(SOCKET) != WIFI_STATUS_OK) {
- //LOG(("ERROR: failed to close current Server connection\n\r"));
- //LOG(("\n\r"));
- return -1;
- }
- } while (StopServer == false);
-
- if (WIFI_STATUS_OK != WIFI_StopServer(SOCKET)) {
- //LOG(("ERROR: Cannot stop server.\n\r"));
- //LOG(("\n\r"));
- }
-
- //LOG(("Server is stop\n\r"));
- return 0;
- }
-
- static bool WebServerProcess(void) {
- uint8_t LedState = 1;
- uint8_t temp;
- uint16_t respLen;
- static uint8_t resp[1024];
- bool stopserver = false;
-
- if (WIFI_STATUS_OK == WIFI_ReceiveData(SOCKET, resp, 1000, &respLen,
- WIFI_READ_TIMEOUT)) {
- //LOG(("get %d byte from server\n\r",respLen));
-
- if (respLen > 0) {
- if (strstr((char*) resp, "GET")) // GET: put web page /
- {
- //temp = (int) GetSensores(); //BSP_TSENSOR_ReadTemp();
- if (SendWebPage(LedState, temp) != WIFI_STATUS_OK) {
- //LOG(("> ERROR : Cannot send web page\n\r"));
- } else {
- //LOG(("Send page after  GET command\n\r"));
- }
- } else if (strstr((char*) resp, "POST"))/ POST: received info /
- {
- //LOG(("Post request\n\r"));
-
- if (strstr((char*) resp, "radio")) {
- if (strstr((char*) resp, "radio=0")) {
- LedState = 0;
- //EncolarLED(LedState);
- } else if (strstr((char*) resp, "radio=1")) {
- LedState = 1;
- //EncolarLED(LedState);
- }
- //temp = (int) GetSensores(); //BSP_TSENSOR_ReadTemp();
- }
- if (strstr((char*) resp, "stop_server")) {
- if (strstr((char*) resp, "stop_server=0")) {
- stopserver = false;
- } else if (strstr((char*) resp, "stop_server=1")) {
- stopserver = true;
- }
- }
- //temp = (int) GetSensores(); //BSP_TSENSOR_ReadTemp();
- if (SendWebPage(LedState, temp) != WIFI_STATUS_OK) {
- //LOG(("> ERROR : Cannot send web page\n\r"));
- } else {
- //LOG(("Send Page after POST command\n\r"));
- }
- }
- }
- } else {
- //LOG(("Client close connection\n\r"));
- }
- return stopserver;
-
- }
- */

@@ -7,7 +7,10 @@ app = Flask(__name__)
 @app.route('/mi-api', methods=['GET'])
 def get_data():
     # Aquí generas tu respuesta en formato JSON
-    response = {'key': random.randint(1, 10)}
+    response = {
+        "ins": random.choices(range(6), k=10),
+        "dur": [random.randint(1, 99) for _ in range(10)]
+    }
 
     # Convertir la respuesta en formato JSON a una cadena de texto
     response_str = json.dumps(response)

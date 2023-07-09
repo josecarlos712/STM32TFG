@@ -22,7 +22,6 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -89,9 +88,6 @@ static void MX_SPI3_Init(void);
 static void MX_USART1_UART_Init(void);
 static void MX_USB_OTG_FS_PCD_Init(void);
 static void MX_UART4_Init(void);
-void serialRxTask(void *argument);
-void serialTxTask(void *argument);
-void WebServerTask(void *argument);
 
 /* USER CODE BEGIN PFP */
 
@@ -173,11 +169,9 @@ int main(void) {
 	/* creation of RxTask */
 	//RxTaskHandle = osThreadNew(serialRxTask, NULL, &RxTask_attributes);
 	/* creation of TxTask */
-	//TxTaskHandle = osThreadNew(serialTxTask, NULL, &TxTask_attributes);
+	TxTaskHandle = osThreadNew(serialTxTask, NULL, &TxTask_attributes);
 	/* creation of WebServerTask */
-	WebServerTaskHandle = osThreadNew(WebServerTask, NULL,
-			&WebServerTask_attributes);
-
+	//WebServerTaskHandle = osThreadNew(WebServerTask, NULL,&WebServerTask_attributes);
 	/* USER CODE BEGIN RTOS_THREADS */
 	CreateSerialTask();
 	/* USER CODE END RTOS_THREADS */
@@ -274,14 +268,14 @@ static void MX_DFSDM1_Init(void) {
 	hdfsdm1_channel1.Instance = DFSDM1_Channel1;
 	hdfsdm1_channel1.Init.OutputClock.Activation = ENABLE;
 	hdfsdm1_channel1.Init.OutputClock.Selection =
-			DFSDM_CHANNEL_OUTPUT_CLOCK_SYSTEM;
+	DFSDM_CHANNEL_OUTPUT_CLOCK_SYSTEM;
 	hdfsdm1_channel1.Init.OutputClock.Divider = 2;
 	hdfsdm1_channel1.Init.Input.Multiplexer = DFSDM_CHANNEL_EXTERNAL_INPUTS;
 	hdfsdm1_channel1.Init.Input.DataPacking = DFSDM_CHANNEL_STANDARD_MODE;
 	hdfsdm1_channel1.Init.Input.Pins = DFSDM_CHANNEL_FOLLOWING_CHANNEL_PINS;
 	hdfsdm1_channel1.Init.SerialInterface.Type = DFSDM_CHANNEL_SPI_RISING;
 	hdfsdm1_channel1.Init.SerialInterface.SpiClock =
-			DFSDM_CHANNEL_SPI_CLOCK_INTERNAL;
+	DFSDM_CHANNEL_SPI_CLOCK_INTERNAL;
 	hdfsdm1_channel1.Init.Awd.FilterOrder = DFSDM_CHANNEL_FASTSINC_ORDER;
 	hdfsdm1_channel1.Init.Awd.Oversampling = 1;
 	hdfsdm1_channel1.Init.Offset = 0;
@@ -527,7 +521,7 @@ static void MX_GPIO_Init(void) {
 
 	/*Configure GPIO pin Output Level */
 	HAL_GPIO_WritePin(GPIOE,
-			M24SR64_Y_RF_DISABLE_Pin | M24SR64_Y_GPO_Pin | ISM43362_RST_Pin,
+	M24SR64_Y_RF_DISABLE_Pin | M24SR64_Y_GPO_Pin | ISM43362_RST_Pin,
 			GPIO_PIN_RESET);
 
 	/*Configure GPIO pin Output Level */
@@ -541,7 +535,7 @@ static void MX_GPIO_Init(void) {
 
 	/*Configure GPIO pin Output Level */
 	HAL_GPIO_WritePin(GPIOD,
-			USB_OTG_FS_PWR_EN_Pin | PMOD_RESET_Pin | STSAFE_A100_RESET_Pin,
+	USB_OTG_FS_PWR_EN_Pin | PMOD_RESET_Pin | STSAFE_A100_RESET_Pin,
 			GPIO_PIN_RESET);
 
 	/*Configure GPIO pin Output Level */
@@ -711,6 +705,14 @@ static void MX_GPIO_Init(void) {
 /* USER CODE BEGIN 4 */
 
 /* USER CODE END 4 */
+
+/* USER CODE BEGIN Header_serialRxTask */
+/**
+ * @brief  Function implementing the RxTask thread.
+ * @param  argument: Not used
+ * @retval None
+ */
+/* USER CODE END Header_serialRxTask */
 
 /**
  * @brief  Period elapsed callback in non blocking mode
